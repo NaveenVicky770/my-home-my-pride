@@ -1,0 +1,7 @@
+{
+  "name": "My Home My Pride",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
