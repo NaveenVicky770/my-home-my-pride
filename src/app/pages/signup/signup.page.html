@@ -1,0 +1,60 @@
+<!-- Back button with a default href -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div >
+      <div class="login-main">
+
+        <div class="container pt-3 pb-4">
+          <div class="logo">
+            <img src="assets/images/logo.png" class="ion-margin-top" alt="myhomeLogo" />
+          </div>
+
+          <ion-text class="ion-text-center" color="primary" >
+            <h2 class="app-name mt-1">House Name</h2>
+          </ion-text>
+
+        </div>
+
+        <ion-card class="ion-margin">
+          <ion-card-header class="ion-no-margin">
+            <ion-card-title color="primary" class="ion-margin-bottom login-card">Register</ion-card-title>
+            <ion-card-subtitle>You'll receive code to verify your mobile number</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class="ion-no-margin">
+            <ion-list>
+              <ion-item class="ion-activated">
+                  <ion-label  position="floating">Name</ion-label>
+                  <ion-input  placeholder="Enter Name" type="text" required></ion-input>
+              </ion-item>
+              <ion-item class="ion-activated">
+                <ion-label  position="floating">Mobile</ion-label>
+                <ion-input  placeholder="Enter Mobile No" type="text" required></ion-input>
+              </ion-item>
+              <ion-item class="ion-activated">
+                <ion-label  position="floating">Email</ion-label>
+                <ion-input  placeholder="Enter Email" type="text" required></ion-input>
+              </ion-item>
+
+              <div lines="none" class="already mt-4">
+                <ion-text class="ion-margin">
+                  Already have an account? <span routerLink="/signin" class="text-primary">Login</span>
+                </ion-text>
+              </div>
+
+              <!-- <ion-text class="ion-text-center" color="danger">{{"error here"}}</ion-text> -->
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+
+
+      </div>
+  </div>
+</ion-content>

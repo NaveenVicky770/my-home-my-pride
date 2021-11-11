@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from '../services/common/common.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  public houseNames = ['Naveen', 'Madhu', 'Shabari','Sasi', 'Deepu', 'Moha','Sunil','Chaitanya'];
+  public isSignIn = window.localStorage.getItem('isLoggedIn');
+
   constructor() {}
+
+  search(){
+    //search logic
+  }
+
+  ionViewWillEnter(){
+    this.isSignIn = window.localStorage.getItem('isLoggedIn');
+  }
+
 
 }

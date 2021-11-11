@@ -1,0 +1,109 @@
+<!-- Back button with a default href -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+      <div class="login-main">
+
+        <div class="container pt-3 pb-4">
+          <div class="logo">
+            <img src="assets/images/logo.png" class="ion-margin-top" alt="myhomeLogo" />
+          </div>
+
+          <ion-text class="ion-text-center" color="primary" >
+            <h2 class="app-name mt-1">House Name</h2>
+          </ion-text>
+
+        </div>
+
+        <ion-card class="ion-margin">
+
+          <ion-card-header class="ion-no-margin">
+            <ion-card-title color="primary" class="ion-margin-bottom login-card">{{ currentFragment === 'mobile' ? 'Login': 'Verification'}}</ion-card-title>
+            <ion-card-subtitle>You'll receive code to verify your mobile number</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class="ion-no-margin">
+
+            <ion-list class="loginform">
+              <form [formGroup]="form">
+                <ion-list class="ion-text-center" *ngIf="currentFragment === 'mobile'">
+                  <ion-list>
+                      <ion-item class="ion-activated">
+                          <ion-label  position="floating">Mobile No</ion-label>
+                          <ion-input
+                          formControlName="phoneNo"
+                          [(ngModel)]="mobileno"
+                          placeholder="Enter Mobile No"
+                          type="text" required></ion-input>
+                      </ion-item>
+                      <ng-container ></ng-container>
+                      <ng-container
+                      *ngIf="!form.get('phoneNo').valid && form.get('phoneNo').touched"
+                      >
+                        <ion-text class="text-danger ion-margin">
+                          <ion-text *ngIf="form.controls.phoneNo.errors.required">
+                            <p>Mobile Number is required</p>
+                          </ion-text>
+                          <ion-text *ngIf="form.controls.phoneNo.errors.minlength">
+                            <p>Mobile number should be atleast 10 digits</p>
+                          </ion-text>
+                        </ion-text>
+
+                      </ng-container>
+                  </ion-list>
+                  <ion-button
+                  [disabled]="!form.valid"
+                  type="submit" class="signup"
+                  color="primary" type="button"
+                  (click)="userLogin()">Send OTP</ion-button>
+                </ion-list>
+              </form>
+
+
+              <ion-list class="ion-text-center" *ngIf="currentFragment === 'otp'" >
+                  <ion-list>
+                      <div class="otp-conc">
+                          <ng-otp-input #ngOtpInput
+                          (onInputChange)="onOtpChange($event)"
+                          *ngIf="showOtpComponent"
+                          [config]="config" type="number" pattern="[0-9]*"
+                          ></ng-otp-input>
+
+                          <br>
+                          <ion-text
+                          *ngIf="this.otpcounter> 0"
+                          color="danger"
+                          class="resend-otp ion-margin-top" >Resend Otp in ({{this.otpcounter}} s)</ion-text>
+                      </div>
+                  </ion-list>
+                  <div class="welcome-buttons">
+                      <ion-button class="signup" type="button" (click)="VerifyLogin()">Submit</ion-button>
+                  </div>
+                  <ion-button
+                          color="success"
+                          class="resend-otp ion-margin-top"
+                           (click)="resendOtp()"
+                            *ngIf="this.otpcounter === 0">
+                    Resend Otp
+                  </ion-button>
+              </ion-list>
+
+              <div lines="none" class="already mt-2">
+                <ion-text class="ion-margin">
+                  Don't have an account? <span routerLink="/signup" class="text-primary">SignUp</span>
+                </ion-text>
+              </div>
+
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+  </div>
+</ion-content>

@@ -1,3 +1,62 @@
+<ngx-spinner
+  bdColor="#2c2891"
+  type="ball-scale-multiple"
+>
+  <div class="text-white mb-5">
+    <div class="logo">
+      <img src="assets/images/logo.png" class="ion-margin-top" alt="myhomeLogo" />
+    </div>
+    <ion-text>
+      <h1 class="my-2">House Name</h1>
+    </ion-text>
+    <ion-text>My Home - My Pride </ion-text>
+  </div>
+  <p style="text-align:center;color: white">Loading...</p>
+
+</ngx-spinner>
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content" side="start" type="overlay" menuId="custom" id="custom" swipeGesture="false">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <div class="logo">
+          <img src="assets/images/logo.png" class="ion-margin-top" alt="myhomeLogo" />
+        </div>
+        <ion-title class="ion-text-center ion-margin-bottom">
+          House Name
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+
+        <ng-container *ngIf="!isUserLoggedIn">
+          <ion-menu-toggle>
+            <ion-item lines="none" routerLink="/signup">
+                <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                <ion-label>Register</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
+            <ion-item lines="none" routerLink="/signin">
+                <ion-icon name="log-in-outline" slot="start"></ion-icon>
+                <ion-label>Login</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ng-container>
+
+        <ng-container *ngIf="isUserLoggedIn">
+          <ion-menu-toggle  *ngFor="let page of appPages; let i=index">
+            <ion-item [routerLink]="[page.url]" lines="none">
+              <ion-icon name="{{page.icon}}" slot="start"></ion-icon>
+              <ion-label>{{page.title}}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ng-container>
+
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+  <ion-router-outlet id="main-content" main></ion-router-outlet>
 </ion-app>

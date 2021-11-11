@@ -1,0 +1,12 @@
+.logo{
+
+  position: relative;
+  justify-content: center;
+  display: flex;
+  img{
+    float: left;
+    border-radius: 100px;
+    max-width: 150px;
+    max-height: 50px;
+  }
+}
