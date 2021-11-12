@@ -23,6 +23,22 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'support',
+    loadChildren: () => import('./pages/support/support.module').then( m => m.SupportPageModule)
+  },
+  {
+    path: 'visibility',
+    loadChildren: () => import('./pages/visibility/visibility.module').then( m => m.VisibilityPageModule)
+  },
+  {
+    path: 'addlocation',
+    loadChildren: () => import('./pages/addlocation/addlocation.module').then( m => m.AddlocationPageModule)
+  },
+  {
+    path: 'editlocation',
+    loadChildren: () => import('./pages/editlocation/editlocation.module').then( m => m.EditlocationPageModule)
   }
 ];
 

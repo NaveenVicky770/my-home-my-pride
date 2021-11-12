@@ -23,6 +23,23 @@ export class ApiService {
   };
   constructor(private http: HttpClient) { }
 
+
+
+  users=[];
+
+
+
+  public userRegister(user: any)
+  {
+    this.users.push(user);
+    console.log(this.users);
+  }
+
+  public userLogin()
+  {
+    return this.users;
+  }
+
   BaseURL()
   {
     return this.baseURL;

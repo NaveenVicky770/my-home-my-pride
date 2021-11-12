@@ -31,7 +31,7 @@ export class SigninPage implements OnInit {
   form: FormGroup;
 
 
-  currentFragment;
+  currentFragment='mobile';
   errorMsg;
   mobileno;
   otp: string;

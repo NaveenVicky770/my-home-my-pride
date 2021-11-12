@@ -18,12 +18,12 @@ export class AppComponent implements OnInit {
   public appPages = [
 
     {
-      title: 'Home',
+      title: 'My House Name',
       url: 'home',
       icon: 'home-outline'
     },
     {
-      title: 'Visibility',
+      title: 'Manage Visibility',
       url: 'visibility',
       icon: 'eye-outline'
     },
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       icon: 'card-outline'
     },
     {
-      title: 'Share',
+      title: 'Share location / Event',
       url: 'share',
       icon: 'share-social-outline'
     },
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 3000);
+    }, 500);
   }
 
   ionViewWillEnter(){

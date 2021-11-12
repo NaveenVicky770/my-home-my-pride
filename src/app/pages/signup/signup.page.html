@@ -10,7 +10,7 @@
   <div >
       <div class="login-main">
 
-        <div class="container pt-3 pb-4">
+        <div class="container pt-3 pb-3">
           <div class="logo">
             <img src="assets/images/logo.png" class="ion-margin-top" alt="myhomeLogo" />
           </div>
@@ -28,28 +28,34 @@
           </ion-card-header>
 
           <ion-card-content class="ion-no-margin">
-            <ion-list>
-              <ion-item class="ion-activated">
-                  <ion-label  position="floating">Name</ion-label>
-                  <ion-input  placeholder="Enter Name" type="text" required></ion-input>
-              </ion-item>
-              <ion-item class="ion-activated">
-                <ion-label  position="floating">Mobile</ion-label>
-                <ion-input  placeholder="Enter Mobile No" type="text" required></ion-input>
-              </ion-item>
-              <ion-item class="ion-activated">
-                <ion-label  position="floating">Email</ion-label>
-                <ion-input  placeholder="Enter Email" type="text" required></ion-input>
-              </ion-item>
+            <form [formGroup]="form">
+              <ion-list>
+                <ion-item class="ion-activated">
+                    <ion-label  position="floating">Name</ion-label>
+                    <ion-input [(ngModel)]="userName" formControlName="userName" placeholder="Enter Name" type="text" required></ion-input>
+                </ion-item>
+                <ion-item class="ion-activated">
+                  <ion-label  position="floating">Mobile</ion-label>
+                  <ion-input [(ngModel)]="phoneNo" formControlName="phoneNo" placeholder="Enter Mobile No" type="text" required></ion-input>
+                </ion-item>
+                <ion-item class="ion-activated">
+                  <ion-label  position="floating">Email</ion-label>
+                  <ion-input [(ngModel)]="email" formControlName="email"  placeholder="Enter Email" type="text" required></ion-input>
+                </ion-item>
 
-              <div lines="none" class="already mt-4">
-                <ion-text class="ion-margin">
-                  Already have an account? <span routerLink="/signin" class="text-primary">Login</span>
-                </ion-text>
-              </div>
+                <div class="text-center ion-margin-top">
+                  <ion-button color="primary" (click)="signUp()">Register</ion-button>
+                </div>
 
-              <!-- <ion-text class="ion-text-center" color="danger">{{"error here"}}</ion-text> -->
-            </ion-list>
+                <div lines="none" class="already mt-4">
+                  <ion-text class="ion-margin">
+                    Already have an account? <span routerLink="/signin" class="text-primary">Login</span>
+                  </ion-text>
+                </div>
+
+                <!-- <ion-text class="ion-text-center" color="danger">{{"error here"}}</ion-text> -->
+              </ion-list>
+            </form>
           </ion-card-content>
         </ion-card>
 
