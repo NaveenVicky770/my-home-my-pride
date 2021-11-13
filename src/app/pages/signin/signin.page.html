@@ -44,12 +44,13 @@
 
         <ion-card-content class="ion-no-margin">
           <ion-list class="loginform">
-            <form [formGroup]="form">
+            <form [formGroup]="loginForm">
               <ion-list
                 class="ion-text-center"
                 *ngIf="currentFragment === 'mobile'"
               >
                 <ion-list>
+
                   <ion-item class="ion-activated">
                     <ion-label position="floating">Mobile No</ion-label>
                     <ion-input
@@ -62,23 +63,24 @@
                       required
                     ></ion-input>
                   </ion-item>
-                  <ng-container></ng-container>
+
                   <ng-container
-                    *ngIf="!form.get('phoneNo').valid && form.get('phoneNo').touched"
+                    *ngIf="!loginForm.get('phoneNo').valid && loginForm.get('phoneNo').touched"
                   >
                     <ion-text class="text-danger ion-margin">
-                      <ion-text *ngIf="form.controls.phoneNo.errors.required">
+                      <ion-text *ngIf="loginForm.controls.phoneNo.errors.required">
                         <p>Mobile Number is required</p>
                       </ion-text>
-                      <ion-text *ngIf="form.controls.phoneNo.errors.minlength">
+                      <ion-text *ngIf="loginForm.controls.phoneNo.errors.minlength">
                         <p>Should be atleast 10 digits</p>
                       </ion-text>
                     </ion-text>
                   </ng-container>
+
                 </ion-list>
                 <!-- [disabled]="!form.valid" -->
                 <ion-button
-                  [disabled]="!form.valid"
+                  [disabled]="!loginForm.valid"
                   type="submit"
                   class="signup"
                   color="primary"

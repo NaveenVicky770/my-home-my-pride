@@ -11,7 +11,7 @@ export class HomePage {
   public houseNames = ['Naveen', 'Madhu', 'Shabari','Sasi', 'Deepu', 'Moha','Sunil','Chaitanya'];
   public isSignIn = window.localStorage.getItem('isLoggedIn');
 
-  constructor() {}
+  constructor(private commonService: CommonService) {}
 
   search(){
     //search logic
@@ -19,6 +19,13 @@ export class HomePage {
 
   ionViewWillEnter(){
     this.isSignIn = window.localStorage.getItem('isLoggedIn');
+    console.log(this.isSignIn);
+    if(this.isSignIn === '1'){
+      this.commonService.isUserLoggedIn.next(true);
+    }
+    else{
+      this.commonService.isUserLoggedIn.next(false);
+    }
   }
 
 

@@ -30,14 +30,16 @@ export class ApiService {
 
 
   public userRegister(user: any)
+
   {
     this.users.push(user);
-    console.log(this.users);
+    const stringdData = JSON.stringify(this.users);
+    window.localStorage.setItem('users', stringdData);
   }
 
-  public userLogin()
+  public getUsers()
   {
-    return this.users;
+    return window.localStorage.getItem('users');;
   }
 
   BaseURL()

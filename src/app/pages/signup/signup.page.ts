@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common/common.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +19,8 @@ export class SignupPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -45,8 +47,9 @@ export class SignupPage implements OnInit {
     if(!this.form.valid){
       return;
     }
-    this.apiService.userRegister({userName: this.userName,phoneNo: this.phoneNo,email: this.email});
+    this.apiService.userRegister({userName: this.userName,phoneNo: this.phoneNo ,email: this.email});
     this.router.navigateByUrl('/signin');
+    this.commonService.presentToast('Registration Successful','',2000,'bottom');
   }
 
 }

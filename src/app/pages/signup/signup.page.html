@@ -7,60 +7,121 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div >
-      <div class="login-main">
-
-        <div class="container pt-3 pb-3">
-          <div class="logo">
-            <img src="assets/images/logo.png" class="ion-margin-top" alt="myhomeLogo" />
-          </div>
-
-          <ion-text class="ion-text-center" color="primary" >
-            <h2 class="app-name mt-1">House Name</h2>
-          </ion-text>
-
+  <div>
+    <div class="login-main">
+      <div class="container pt-3 pb-3">
+        <div class="logo">
+          <img
+            src="assets/images/logo.png"
+            class="ion-margin-top"
+            alt="myhomeLogo"
+          />
         </div>
 
-        <ion-card class="ion-margin">
-          <ion-card-header class="ion-no-margin">
-            <ion-card-title color="primary" class="ion-margin-bottom login-card">Register</ion-card-title>
-            <ion-card-subtitle>You'll receive code to verify your mobile number</ion-card-subtitle>
-          </ion-card-header>
-
-          <ion-card-content class="ion-no-margin">
-            <form [formGroup]="form">
-              <ion-list>
-                <ion-item class="ion-activated">
-                    <ion-label  position="floating">Name</ion-label>
-                    <ion-input [(ngModel)]="userName" formControlName="userName" placeholder="Enter Name" type="text" required></ion-input>
-                </ion-item>
-                <ion-item class="ion-activated">
-                  <ion-label  position="floating">Mobile</ion-label>
-                  <ion-input [(ngModel)]="phoneNo" formControlName="phoneNo" placeholder="Enter Mobile No" type="text" required></ion-input>
-                </ion-item>
-                <ion-item class="ion-activated">
-                  <ion-label  position="floating">Email</ion-label>
-                  <ion-input [(ngModel)]="email" formControlName="email"  placeholder="Enter Email" type="text" required></ion-input>
-                </ion-item>
-
-                <div class="text-center ion-margin-top">
-                  <ion-button color="primary" (click)="signUp()">Register</ion-button>
-                </div>
-
-                <div lines="none" class="already mt-4">
-                  <ion-text class="ion-margin">
-                    Already have an account? <span routerLink="/signin" class="text-primary">Login</span>
-                  </ion-text>
-                </div>
-
-                <!-- <ion-text class="ion-text-center" color="danger">{{"error here"}}</ion-text> -->
-              </ion-list>
-            </form>
-          </ion-card-content>
-        </ion-card>
-
-
-
+        <ion-text class="ion-text-center" color="primary">
+          <h2 class="app-name mt-1">House Name</h2>
+        </ion-text>
       </div>
+
+      <ion-card class="ion-margin">
+        <ion-card-header class="ion-no-margin">
+          <ion-card-title color="primary" class="ion-margin-bottom login-card"
+            >Register</ion-card-title
+          >
+          <ion-card-subtitle
+            >You'll receive code to verify your mobile number</ion-card-subtitle
+          >
+        </ion-card-header>
+
+        <ion-card-content class="ion-no-margin">
+          <form [formGroup]="form">
+            <ion-list>
+              <ion-item class="ion-activated">
+                <ion-label position="floating">Name</ion-label>
+                <ion-input
+                  [(ngModel)]="userName"
+                  formControlName="userName"
+                  placeholder="Enter Name"
+                  type="text"
+                  required
+                ></ion-input>
+              </ion-item>
+              <ng-container
+                *ngIf="!form.get('userName').valid && form.get('userName').touched"
+              >
+                <ion-text class="text-danger">
+                  <p>UserName is Required</p>
+                </ion-text>
+              </ng-container>
+
+              <ion-item class="ion-activated">
+                <ion-label position="floating">Mobile No</ion-label>
+                <ion-input
+                  formControlName="phoneNo"
+                  [(ngModel)]="phoneNo"
+                  placeholder="Enter Mobile No"
+                  maxlength="10"
+                  minlength="10"
+                  type="tel"
+                  required
+                ></ion-input>
+              </ion-item>
+
+              <ng-container
+                *ngIf="!form.get('phoneNo').valid && form.get('phoneNo').touched"
+              >
+                <ion-text class="text-danger">
+                  <ion-text *ngIf="form.controls.phoneNo.errors.required">
+                    <p>Mobile Number is required</p>
+                  </ion-text>
+                  <ion-text *ngIf="form.controls.phoneNo.errors.minlength">
+                    <p>Should be atleast 10 digits</p>
+                  </ion-text>
+                </ion-text>
+              </ng-container>
+
+              <ion-item class="ion-activated">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input
+                  [(ngModel)]="email"
+                  formControlName="email"
+                  placeholder="Enter Email"
+                  type="text"
+                  required
+                ></ion-input>
+              </ion-item>
+              <ng-container
+                *ngIf="!form.get('email').valid && form.get('email').touched"
+              >
+                <ion-text class="text-danger">
+                  <ion-text *ngIf="form.controls.email.errors.required">
+                    <p>Email is required</p>
+                  </ion-text>
+                  <ion-text *ngIf="form.controls.email.errors.email">
+                    <p>Enter Valid mail</p>
+                  </ion-text>
+                </ion-text>
+              </ng-container>
+
+
+              <div class="text-center ion-margin-top">
+                <ion-button color="primary" (click)="signUp()"
+                  >Register</ion-button
+                >
+              </div>
+
+              <div lines="none" class="already mt-4">
+                <ion-text class="ion-margin">
+                  Already have an account?
+                  <span routerLink="/signin" class="text-primary">Login</span>
+                </ion-text>
+              </div>
+
+              <!-- <ion-text class="ion-text-center" color="danger">{{"error here"}}</ion-text> -->
+            </ion-list>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

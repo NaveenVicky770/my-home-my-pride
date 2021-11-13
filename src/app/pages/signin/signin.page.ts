@@ -28,7 +28,7 @@ export class SigninPage implements OnInit {
     }
   };
 
-  form: FormGroup;
+  loginForm: FormGroup;
 
 
   currentFragment='mobile';
@@ -51,7 +51,7 @@ export class SigninPage implements OnInit {
 
 
   ngOnInit() {
-    this.form = new FormGroup({
+    this.loginForm = new FormGroup({
       phoneNo: new FormControl(null,{
         updateOn: 'change',
         validators: [Validators.required,Validators.minLength(10)]
@@ -79,10 +79,14 @@ export class SigninPage implements OnInit {
 
   showOtpFragment(){
     let userFound=false;
-    if(!this.form.valid){
+    if(!this.loginForm.valid){
       return;
     }
-    this.apiService.users.forEach(user => {
+
+    const users = (JSON.parse(this.apiService.getUsers()));
+    console.log('check');
+
+    users.forEach(user => {
       console.log(user.phoneNo,this.mobileno);
       if(user.phoneNo == this.mobileno){
         this.currentFragment = 'otp';
@@ -98,15 +102,17 @@ export class SigninPage implements OnInit {
   }
 
   userLogin(){
-    if(!this.form.valid){
+    if(!this.loginForm.valid){
       return;
     }
 
     if (this.otp) {
       if (this.otp == '') {
         this.errorMsg = "Please enter otp";
+        this.commonService.presentAlert(this.errorMsg, 'error');
       } else if (this.otp.toString().length < 4) {
         this.errorMsg = "Please enter valid otp";
+        this.commonService.presentAlert(this.errorMsg, 'error');
       } else if (this.otp.toString().length == 4) {
         this.errorMsg = "";
         console.log(this.mobileno);
@@ -116,13 +122,19 @@ export class SigninPage implements OnInit {
         this.commonService.isUserLoggedIn.next(true);
         this.commonService.presentToast('Login Successful','',2000,'bottom');
         this.router.navigateByUrl('/home');
-
       } else {
         this.errorMsg = "Please enter otp";
       }
+
+
+      console.log('one');
+
     } else {
       this.errorMsg = "Please enter otp";
+      this.commonService.presentAlert(this.errorMsg, 'error');
+      console.log('two');
     }
+
 
 
 
@@ -173,19 +185,21 @@ export class SigninPage implements OnInit {
   }
 
   resendOtp() {
+    this.commonService.presentToast('OTP Sent Successfully','success');
+    this.StartTimer(30);
     // this.commonService.presentLoading();
-    this.apiService.ResendOTP({ mobile_number: this.mobileno, type: 'login' }).subscribe(resObj => {
-      if(resObj.status == 1)
-      {
-        this.commonService.presentToast(resObj.message,'success');
-        this.StartTimer(30);
-      }
-      else
-      {
-        this.commonService.presentToast(resObj.message,'error');
-      }
-      // this.commonService.hideLoading();
-    });
+    // this.apiService.ResendOTP({ mobile_number: this.mobileno, type: 'login' }).subscribe(resObj => {
+    //   if(resObj.status == 1)
+    //   {
+    //     this.commonService.presentToast(resObj.message,'success');
+    //     this.StartTimer(30);
+    //   }
+    //   else
+    //   {
+    //     this.commonService.presentToast(resObj.message,'error');
+    //   }
+    //   // this.commonService.hideLoading();
+    // });
   }
 
   VerifyLogin(){
