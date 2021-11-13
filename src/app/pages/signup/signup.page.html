@@ -54,7 +54,7 @@
                 </ion-text>
               </ng-container>
 
-              <ion-item class="ion-activated">
+              <!-- <ion-item class="ion-activated">
                 <ion-label position="floating">Mobile No</ion-label>
                 <ion-input
                   formControlName="phoneNo"
@@ -65,10 +65,27 @@
                   type="tel"
                   required
                 ></ion-input>
+              </ion-item> -->
+
+              <ion-item>
+                <ion-intl-tel-input
+                  [(ngModel)]="phoneNo"
+                  inputPlaceholder="9505444749"
+                  formControlName="phoneNumber" >
+                </ion-intl-tel-input>
               </ion-item>
 
-              <ng-container
-                *ngIf="!form.get('phoneNo').valid && form.get('phoneNo').touched"
+              <div *ngIf="phoneNumber.invalid && phoneNumber.touched">
+                <ion-text color="danger" *ngIf="phoneNumber.errors.required">
+                  <p class="ion-no-margin"><sub>Phone is required.</sub></p>
+                </ion-text>
+                <ion-text color="danger" *ngIf="phoneNumber.errors.phone">
+                  <p class="ion-no-margin"><sub>Phone number is not valid.</sub></p>
+                </ion-text>
+              </div>
+
+              <!-- <ng-container
+                *ngIf="!form.get('phoneNumber').valid && form.get('phoneNumber').touched"
               >
                 <ion-text class="text-danger">
                   <ion-text *ngIf="form.controls.phoneNo.errors.required">
@@ -78,7 +95,7 @@
                     <p>Should be atleast 10 digits</p>
                   </ion-text>
                 </ion-text>
-              </ng-container>
+              </ng-container> -->
 
               <ion-item class="ion-activated">
                 <ion-label position="floating">Email</ion-label>

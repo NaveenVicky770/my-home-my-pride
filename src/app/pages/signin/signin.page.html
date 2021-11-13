@@ -44,15 +44,17 @@
 
         <ion-card-content class="ion-no-margin">
           <ion-list class="loginform">
-            <form [formGroup]="loginForm">
+            <!-- (ngSubmit)="onSubmit()" -->
+            <form [formGroup]="form" >
               <ion-list
                 class="ion-text-center"
                 *ngIf="currentFragment === 'mobile'"
               >
                 <ion-list>
 
-                  <ion-item class="ion-activated">
+                  <!-- <ion-item class="ion-activated">
                     <ion-label position="floating">Mobile No</ion-label>
+                    <ion-input class="input" ng-model="countryCode" placeholder="Country Code"></ion-input>
                     <ion-input
                       formControlName="phoneNo"
                       [(ngModel)]="mobileno"
@@ -62,9 +64,17 @@
                       type="tel"
                       required
                     ></ion-input>
+                  </ion-item> -->
+
+                  <ion-item>
+                    <ion-intl-tel-input
+                      [(ngModel)]="mobileno"
+                      inputPlaceholder="9505444749"
+                      formControlName="phoneNumber" >
+                    </ion-intl-tel-input>
                   </ion-item>
 
-                  <ng-container
+                  <!-- <ng-container
                     *ngIf="!loginForm.get('phoneNo').valid && loginForm.get('phoneNo').touched"
                   >
                     <ion-text class="text-danger ion-margin">
@@ -75,12 +85,21 @@
                         <p>Should be atleast 10 digits</p>
                       </ion-text>
                     </ion-text>
-                  </ng-container>
+                  </ng-container> -->
+
+                  <div *ngIf="phoneNumber.invalid && phoneNumber.touched">
+                    <ion-text color="danger" *ngIf="phoneNumber.errors.required">
+                      <p class="ion-no-margin"><sub>Phone is required.</sub></p>
+                    </ion-text>
+                    <ion-text color="danger" *ngIf="phoneNumber.errors.phone">
+                      <p class="ion-no-margin"><sub>Phone number is not valid.</sub></p>
+                    </ion-text>
+                  </div>
 
                 </ion-list>
                 <!-- [disabled]="!form.valid" -->
                 <ion-button
-                  [disabled]="!loginForm.valid"
+                  [disabled]="!form.valid"
                   type="submit"
                   class="signup"
                   color="primary"

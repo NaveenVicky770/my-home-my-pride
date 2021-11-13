@@ -9,15 +9,19 @@ import { SigninPageRoutingModule } from './signin-routing.module';
 
 import { SigninPage } from './signin.page';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { IonicSelectableModule } from 'ionic-selectable';
+import { IonIntlTelInputModule } from 'ion-intl-tel-input';
 
 @NgModule({
   imports: [
+    IonIntlTelInputModule,
     CommonModule,
     FormsModule,
     IonicModule,
     SigninPageRoutingModule,
     NgOtpInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IonicSelectableModule,
   ],
   declarations: [SigninPage]
 })

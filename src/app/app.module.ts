@@ -12,6 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from  '@angular/common/http';
 // import { HeaderComponent } from './components/header/header/header.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { IonIntlTelInputModule } from 'ion-intl-tel-input';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BrowserAnimationsModule,
     HttpClientModule,
     NgxSpinnerModule,
+    IonIntlTelInputModule,
+    IonicSelectableModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent

@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { CommonService } from 'src/app/services/common/common.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IonIntlTelInputValidators } from 'ion-intl-tel-input';
+
+
 
 @Component({
   selector: 'app-signin',
@@ -28,8 +31,10 @@ export class SigninPage implements OnInit {
     }
   };
 
-  loginForm: FormGroup;
+  // loginForm: FormGroup;
 
+  formValue = {phoneNumber: '', test: ''};
+  form: FormGroup;
 
   currentFragment='mobile';
   errorMsg;
@@ -46,40 +51,31 @@ export class SigninPage implements OnInit {
 
   onOtpChange(otp) {
     this.otp = otp;
-	//alert(this.otp);
   }
 
 
   ngOnInit() {
-    this.loginForm = new FormGroup({
-      phoneNo: new FormControl(null,{
-        updateOn: 'change',
-        validators: [Validators.required,Validators.minLength(10)]
-      })
+    this.form = new FormGroup({
+      phoneNumber: new FormControl({
+        value: this.formValue.phoneNumber
+      }, [
+        Validators.required,
+        IonIntlTelInputValidators.phone
+      ])
     });
   }
 
-  // checkMobileNo(){
+  get phoneNumber() { return this.form.get('phoneNumber'); }
 
-  //   if (this.mobileno) {
-  //     if (this.mobileno == '') {
-  //       this.errorMsg = "Please enter mobile number";
-  //     } else if (this.mobileno.toString().length < 10) {
-  //       this.errorMsg = "Mobile number should be atleast 10 digits";
-  //     } else if (this.mobileno.toString().length == 10) {
-  //       this.errorMsg = "";
-  //       this.userLogin();
-  //     } else {
-  //       this.errorMsg = "Please enter mobile number";
-  //     }
-  //   } else {
-  //     this.errorMsg = "Please enter mobile number";
-  //   }
+  // onSubmit() {
+  //   console.log(this.phoneNumber.value);
   // }
+
 
   showOtpFragment(){
     let userFound=false;
-    if(!this.loginForm.valid){
+    if(!this.form.valid){
+      console.log('Form not Valid');
       return;
     }
 
@@ -87,8 +83,8 @@ export class SigninPage implements OnInit {
     console.log('check');
 
     users.forEach(user => {
-      console.log(user.phoneNo,this.mobileno);
-      if(user.phoneNo == this.mobileno){
+      console.log(this.mobileno.nationalNumber,user.phoneNo);
+      if(user.phoneNo == this.mobileno.nationalNumber){
         this.currentFragment = 'otp';
         this.StartTimer(3);
         this.commonService.presentToast('OTP sent','text-white',2500,'bottom');
@@ -102,7 +98,7 @@ export class SigninPage implements OnInit {
   }
 
   userLogin(){
-    if(!this.loginForm.valid){
+    if(!this.form.valid){
       return;
     }
 
