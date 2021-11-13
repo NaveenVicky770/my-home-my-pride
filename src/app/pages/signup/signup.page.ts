@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,8 @@ export class SignupPage implements OnInit {
   email: any;
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class SignupPage implements OnInit {
       return;
     }
     this.apiService.userRegister({userName: this.userName,phoneNo: this.phoneNo,email: this.email});
+    this.router.navigateByUrl('/signin');
   }
 
 }

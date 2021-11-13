@@ -77,39 +77,85 @@ export class SigninPage implements OnInit {
   //   }
   // }
 
+  showOtpFragment(){
+    let userFound=false;
+    if(!this.form.valid){
+      return;
+    }
+    this.apiService.users.forEach(user => {
+      console.log(user.phoneNo,this.mobileno);
+      if(user.phoneNo == this.mobileno){
+        this.currentFragment = 'otp';
+        this.StartTimer(3);
+        this.commonService.presentToast('OTP sent','text-white',2500,'bottom');
+        userFound=true;
+      }
+    });
+    if(!userFound){
+      this.commonService.presentAlert('User details not found', 'error');
+    }
+
+  }
+
   userLogin(){
     if(!this.form.valid){
       return;
     }
 
-    // this.commonService.presentLoading();
-    this.apiService.UserLogin({ mobile_number: this.mobileno, otp: this.otp }).subscribe(resObj => {
-      // this.commonService.hideLoading();
-      if (resObj.status == 1) {
-        if (typeof resObj.otp != 'undefined') {
-          this.currentFragment = 'otp';
-          this.StartTimer(3);
-          this.commonService.presentToast('OTP sent','text-white',2500,'bottom');
-        }
-        else {
-          if (resObj.user_data.user_id && resObj.user_data.user_id != '') {
-            window.localStorage.setItem('isLoggedIn', '1');
-            window.localStorage.setItem('user_id', resObj.user_data.user_id);
-            window.localStorage.setItem('user_name', resObj.user_data.name);
-            this.commonService.isUserLoggedIn.next(true);
-            this.commonService.presentToast('Login Successful','',2000,'bottom');
-            this.router.navigateByUrl('/home');
+    if (this.otp) {
+      if (this.otp == '') {
+        this.errorMsg = "Please enter otp";
+      } else if (this.otp.toString().length < 4) {
+        this.errorMsg = "Please enter valid otp";
+      } else if (this.otp.toString().length == 4) {
+        this.errorMsg = "";
+        console.log(this.mobileno);
+        window.localStorage.setItem('isLoggedIn', '1');
+        window.localStorage.setItem('user_id',Math.random().toString());
+        window.localStorage.setItem('user_name', 'Naveen_static_name_for_now');
+        this.commonService.isUserLoggedIn.next(true);
+        this.commonService.presentToast('Login Successful','',2000,'bottom');
+        this.router.navigateByUrl('/home');
 
-          }
-          else {
-            this.commonService.presentAlert('User details not found', 'error');
-          }
-        }
+      } else {
+        this.errorMsg = "Please enter otp";
       }
-      else {
-        this.commonService.presentAlert(resObj.message, 'error');
-      }
-    });
+    } else {
+      this.errorMsg = "Please enter otp";
+    }
+
+
+
+
+
+    // this.commonService.presentLoading();
+    // this.apiService.UserLogin({ mobile_number: this.mobileno, otp: this.otp }).subscribe(resObj => {
+    //   // this.commonService.hideLoading();
+    //   if (resObj.status == 1) {
+    //     if (typeof resObj.otp != 'undefined') {
+    //       this.currentFragment = 'otp';
+    //       this.StartTimer(3);
+    //       this.commonService.presentToast('OTP sent','text-white',2500,'bottom');
+    //     }
+    //     else {
+    //       if (resObj.user_data.user_id && resObj.user_data.user_id != '') {
+    //         window.localStorage.setItem('isLoggedIn', '1');
+    //         window.localStorage.setItem('user_id', resObj.user_data.user_id);
+    //         window.localStorage.setItem('user_name', resObj.user_data.name);
+    //         this.commonService.isUserLoggedIn.next(true);
+    //         this.commonService.presentToast('Login Successful','',2000,'bottom');
+    //         this.router.navigateByUrl('/home');
+
+    //       }
+    //       else {
+    //         this.commonService.presentAlert('User details not found', 'error');
+    //       }
+    //     }
+    //   }
+    //   else {
+    //     this.commonService.presentAlert(resObj.message, 'error');
+    //   }
+    // });
   }
 
   ionViewWillEnter(){
