@@ -35,18 +35,15 @@
 
     <ion-card-content class="ion-no-margin" >
       <ion-list>
-        <ion-select
-        class="shadow ion-margin"
-          [interfaceOptions]="customPopoverOptions"
-          interface="popover"
-          placeholder="Select your preffered way"
-        >
-          <ion-select-option
-            *ngFor="let option of supportVia"
-            value="{{option}}"
-            >{{option}}</ion-select-option
-          >
-        </ion-select>
+        <a href="tel:9505444749">
+          <ion-item class="shadow ion-margin-horizontal">
+            <ion-text>
+              Call Support
+            </ion-text>
+            <ion-icon name="call" slot="end" class="text-success"></ion-icon>
+          </ion-item>
+        </a>
+
 
         <ion-item class="shadow ion-margin">
           <ion-label position="stacked">Send message</ion-label>
