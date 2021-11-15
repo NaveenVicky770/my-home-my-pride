@@ -69,8 +69,11 @@
                   <ion-item>
                     <ion-intl-tel-input
                       [(ngModel)]="mobileno"
-                      inputPlaceholder="9505444749"
-                      formControlName="phoneNumber" >
+                      inputPlaceholder=" 9505444749"
+                      formControlName="phoneNumber"
+                      [enableAutoCountrySelect]="true"
+                      modalCssClass="countryCode"
+                       >
                     </ion-intl-tel-input>
                   </ion-item>
 

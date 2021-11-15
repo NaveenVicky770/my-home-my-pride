@@ -24,6 +24,7 @@ export class SignupPage implements OnInit {
   userName: any;
   phoneNo: any;
   email: any;
+  pre
 
   constructor(
     private apiService: ApiService,

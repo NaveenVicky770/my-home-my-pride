@@ -71,7 +71,10 @@
                 <ion-intl-tel-input
                   [(ngModel)]="phoneNo"
                   inputPlaceholder="9505444749"
-                  formControlName="phoneNumber" >
+                  formControlName="phoneNumber"
+                  modalCssClass="countryCode"
+                  preferredCountries={{prefer}}
+                   >
                 </ion-intl-tel-input>
               </ion-item>
 

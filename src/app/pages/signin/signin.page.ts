@@ -31,6 +31,8 @@ export class SigninPage implements OnInit {
     }
   };
 
+  prefer=['India'];
+
   // loginForm: FormGroup;
 
   formValue = {phoneNumber: '', test: ''};

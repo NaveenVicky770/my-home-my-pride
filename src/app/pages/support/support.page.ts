@@ -8,12 +8,6 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
   styleUrls: ['./support.page.scss'],
 })
 export class SupportPage implements OnInit {
-
-  customPopoverOptions: any = {
-    message: 'Select your preffered way'
-  };
-  supportVia=['Call Support','Chat','Ticket'];
-
   constructor( ) { }
 
   ngOnInit() {
