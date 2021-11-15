@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Share location / Event',
-      url: 'share',
+      url: 'sharelocation',
       icon: 'share-social-outline'
     },
     {

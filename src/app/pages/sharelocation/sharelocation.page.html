@@ -25,31 +25,46 @@
   <ion-card class="ion-margin">
     <ion-card-header class="ion-no-margin">
       <ion-card-title color="primary" class="ion-margin-bottom login-card"
-        >Support</ion-card-title
-      >
-      <ion-card-subtitle
-        >My Home - My Pride team is happy to assist you. You can call directly
-        or send message; Please select your option.</ion-card-subtitle
+        >Share Location</ion-card-title
       >
     </ion-card-header>
 
     <ion-card-content class="ion-no-margin">
       <ion-list>
-        <a href="tel:9505444749">
-          <ion-item class="shadow ion-margin-horizontal">
-            <ion-text> Call Support </ion-text>
-            <ion-icon name="call" slot="end" class="text-success"></ion-icon>
-          </ion-item>
-        </a>
+        <ion-text>Select House Name</ion-text>
+        <ion-select
+          class="shadow ion-margin"
+          [interfaceOptions]="customPopoverOptions"
+          interface="popover"
+          placeholder="Select House Name"
+        >
+          <ion-select-option *ngFor="let option of locations" value="{{option}}"
+            >{{option}}</ion-select-option
+          >
+        </ion-select>
 
         <ion-item class="shadow ion-margin">
-          <ion-label position="stacked">Send message</ion-label>
+          <ion-label position="stacked">Your message</ion-label>
           <ion-textarea
-            rows="6"
+            rows="3"
             cols="20"
-            placeholder="Type your query here.."
+            placeholder="Enter message.."
           ></ion-textarea>
         </ion-item>
+
+        <ion-label position="stacked">Select contacts to share</ion-label>
+          <ion-select
+            class="shadow ion-margin"
+            [interfaceOptions]="customContactPopoverOptions"
+            interface="popover"
+            placeholder="Select Contacts to share"
+          >
+            <ion-select-option
+              *ngFor="let option of locations"
+              value="{{option}}"
+              >{{option}}</ion-select-option
+            >
+          </ion-select>
       </ion-list>
     </ion-card-content>
   </ion-card>

@@ -43,6 +43,10 @@ const routes: Routes = [
   {
     path: 'postevent',
     loadChildren: () => import('./pages/postevent/postevent.module').then( m => m.PosteventPageModule)
+  },
+  {
+    path: 'sharelocation',
+    loadChildren: () => import('./pages/sharelocation/sharelocation.module').then( m => m.SharelocationPageModule)
   }
 ];
 
