@@ -14,13 +14,16 @@ import { HttpClientModule } from  '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { IonIntlTelInputModule } from 'ion-intl-tel-input';
 import { IonicSelectableModule } from 'ionic-selectable';
-
+import { enterAnimation } from './animations/animation';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      backButtonText: '',
+      navAnimation: enterAnimation
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
