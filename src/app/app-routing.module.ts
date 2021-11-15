@@ -39,6 +39,10 @@ const routes: Routes = [
   {
     path: 'editlocation',
     loadChildren: () => import('./pages/editlocation/editlocation.module').then( m => m.EditlocationPageModule)
+  },
+  {
+    path: 'postevent',
+    loadChildren: () => import('./pages/postevent/postevent.module').then( m => m.PosteventPageModule)
   }
 ];
 

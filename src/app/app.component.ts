@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Post Event',
-      url: 'addevent',
+      url: 'postevent',
       icon: 'card-outline'
     },
     {
