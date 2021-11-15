@@ -33,12 +33,19 @@
 
     <ion-row>
       <ion-searchbar
-        placeholder="Search..."
+        placeholder="Search for a house..."
         [(ngModel)]="filterTerm"
         animated="true"
       ></ion-searchbar>
 
       <ion-col>
+        <div class="Rectangle-15">
+          <ion-img
+          src="assets/images/house.png"
+          class="house"
+        ></ion-img>
+        </div>
+
         <ion-item *ngFor="let data of userRecords | filter:filterTerm">
           <!-- <ion-col size="2">
             <ion-label>{{data.id}}</ion-label>
