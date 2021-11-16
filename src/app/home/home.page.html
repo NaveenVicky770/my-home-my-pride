@@ -39,17 +39,8 @@
       ></ion-searchbar>
 
       <ion-col>
-        <div class="Rectangle-15">
-          <ion-img
-          src="assets/images/house.png"
-          class="house"
-        ></ion-img>
-        </div>
 
-        <ion-item *ngFor="let data of userRecords | filter:filterTerm">
-          <!-- <ion-col size="2">
-            <ion-label>{{data.id}}</ion-label>
-          </ion-col> -->
+        <ion-item *ngFor="let data of userRecords | filter:filterTerm" routerLink="/showlocation">
 
           <ion-col size="4">
             <ion-thumbnail>
@@ -60,6 +51,7 @@
           <ion-col size="8">
             <ion-label>{{data.name}}</ion-label>
           </ion-col>
+
         </ion-item>
       </ion-col>
     </ion-row>

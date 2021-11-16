@@ -47,6 +47,10 @@ const routes: Routes = [
   {
     path: 'sharelocation',
     loadChildren: () => import('./pages/sharelocation/sharelocation.module').then( m => m.SharelocationPageModule)
+  },
+  {
+    path: 'showlocation',
+    loadChildren: () => import('./pages/showlocation/showlocation.module').then( m => m.ShowlocationPageModule)
   }
 ];
 

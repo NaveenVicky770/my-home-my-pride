@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../services/common/common.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { CommonService } from '../services/common/common.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   public houseNames = [
     'Naveen',
     'Madhu',
@@ -30,22 +30,22 @@ export class HomePage {
     {
       id: 2,
       name: 'Sasi',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg'
+      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
     },
     {
       id: 3,
       name: 'Deepu',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg'
+      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
     },
     {
       id: 4,
       name: 'Mohan',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg'
+      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
     },
     {
       id: 5,
       name: 'Shabari',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg'
+      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
     },
     {
       id: 6,
@@ -75,6 +75,10 @@ export class HomePage {
   ];
 
   constructor(private commonService: CommonService) {}
+
+  ngOnInit(): void {
+    //
+  }
 
   search() {
     //search logic

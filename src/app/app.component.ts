@@ -10,43 +10,45 @@ import { CommonService } from './services/common/common.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   public isSignIn = window.localStorage.getItem('isLoggedIn');
-  isUserLoggedIn= false;
-
+  isUserLoggedIn = false;
 
   public appPages = [
-
     {
       title: 'My House Name',
       url: 'home',
-      icon: 'home-outline'
+      icon: 'home-outline',
+    },
+    {
+      title: 'Show Location',
+      url: 'showlocation',
+      icon: 'location',
     },
     {
       title: 'Manage Visibility',
       url: 'visibility',
-      icon: 'eye-outline'
+      icon: 'eye-outline',
     },
     {
       title: 'Post Event',
       url: 'postevent',
-      icon: 'card-outline'
+      icon: 'card-outline',
     },
     {
       title: 'Share location / Event',
       url: 'sharelocation',
-      icon: 'share-social-outline'
+      icon: 'share-social-outline',
     },
     {
       title: 'Support',
       url: 'support',
-      icon: 'headset-outline'
+      icon: 'headset-outline',
     },
     {
       title: 'Logout',
       url: 'signin',
-      icon: 'log-out-outline'
-    }
+      icon: 'log-out-outline',
+    },
   ];
 
   constructor(
@@ -54,12 +56,12 @@ export class AppComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private commonService: CommonService
   ) {
-    this.commonService.isUserLoggedIn.subscribe( value => {
+    this.commonService.isUserLoggedIn.subscribe((value) => {
       this.isUserLoggedIn = value;
-  });
+    });
   }
   ngOnInit() {
-    let isSignIn='0';
+    let isSignIn = '0';
     console.log('ngOnInit');
 
     /** spinner starts on init */
@@ -67,18 +69,18 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 500);
+    }, 1500);
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.isSignIn = window.localStorage.getItem('isLoggedIn');
   }
 
-  logout(){
+  logout() {
     window.localStorage.removeItem('isLoggedIn');
     window.localStorage.removeItem('user_id');
     this.commonService.isUserLoggedIn.next(false);
-    this.commonService.presentToast('Logged Out','',2000,'bottom');
+    this.commonService.presentToast('Logged Out', '', 2000, 'bottom');
     this.router.navigateByUrl('/signin');
   }
 }

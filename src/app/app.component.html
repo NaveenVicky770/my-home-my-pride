@@ -56,7 +56,7 @@
         </ng-container>
 
         <!-- *ngIf="isUserLoggedIn" -->
-        <ng-container>
+        <ng-container *ngIf="isUserLoggedIn">
           <ion-menu-toggle *ngFor="let page of appPages; let i = index">
             <ion-item [routerLink]="[page.url]" lines="none">
               <ion-icon name="{{ page.icon }}" slot="start"></ion-icon>
