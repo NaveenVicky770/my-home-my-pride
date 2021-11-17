@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>payments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container text-center payment-cont d-flex align-items-center">
+    <div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title color="success">Location added successfully!</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Now please proceed to make payment to make the location visible in
+          search.
+        </ion-card-content>
+      </ion-card>
+      <ion-button (click)="payWithRazorpay()"> Pay Now </ion-button>
+    </div>
+  </div>
+</ion-content>

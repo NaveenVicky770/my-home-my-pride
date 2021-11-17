@@ -33,6 +33,7 @@
     "@ionic/angular": "^5.5.2",
     "@types/google-libphonenumber": "^7.4.23",
     "call-number": "^1.0.1",
+    "capacitor-razorpay": "git+https://github.com/razorpay/razorpay-capacitor.git",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-nativegeocoder": "^3.4.1",
     "flag-icon-css": "^4.1.5",

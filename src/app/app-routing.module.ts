@@ -51,7 +51,11 @@ const routes: Routes = [
   {
     path: 'showlocation',
     loadChildren: () => import('./pages/showlocation/showlocation.module').then( m => m.ShowlocationPageModule)
+  },  {
+    path: 'payments',
+    loadChildren: () => import('./pages/payments/payments.module').then( m => m.PaymentsPageModule)
   }
+
 ];
 
 @NgModule({
