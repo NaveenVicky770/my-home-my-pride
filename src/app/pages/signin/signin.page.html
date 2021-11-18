@@ -45,13 +45,12 @@
         <ion-card-content class="ion-no-margin">
           <ion-list class="loginform">
             <!-- (ngSubmit)="onSubmit()" -->
-            <form [formGroup]="form" >
+            <form [formGroup]="form">
               <ion-list
                 class="ion-text-center"
                 *ngIf="currentFragment === 'mobile'"
               >
                 <ion-list>
-
                   <!-- <ion-item class="ion-activated">
                     <ion-label position="floating">Mobile No</ion-label>
                     <ion-input class="input" ng-model="countryCode" placeholder="Country Code"></ion-input>
@@ -71,9 +70,10 @@
                       [(ngModel)]="mobileno"
                       inputPlaceholder=" 9505444749"
                       formControlName="phoneNumber"
+                      [onlyCountries]="countryIsoCodes"
                       [enableAutoCountrySelect]="true"
                       modalCssClass="countryCode"
-                       >
+                    >
                     </ion-intl-tel-input>
                   </ion-item>
 
@@ -91,14 +91,18 @@
                   </ng-container> -->
 
                   <div *ngIf="phoneNumber.invalid && phoneNumber.touched">
-                    <ion-text color="danger" *ngIf="phoneNumber.errors.required">
+                    <!-- <ion-text
+                      color="danger"
+                      *ngIf="phoneNumber.errors.required"
+                    >
                       <p class="ion-no-margin"><sub>Phone is required.</sub></p>
-                    </ion-text>
+                    </ion-text> -->
                     <ion-text color="danger" *ngIf="phoneNumber.errors.phone">
-                      <p class="ion-no-margin"><sub>Phone number is not valid.</sub></p>
+                      <p class="ion-no-margin">
+                        <sub>Phone number is not valid.</sub>
+                      </p>
                     </ion-text>
                   </div>
-
                 </ion-list>
                 <!-- [disabled]="!form.valid" -->
                 <ion-button

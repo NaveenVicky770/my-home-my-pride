@@ -19,6 +19,9 @@ import { IonIntlTelInputValidators } from 'ion-intl-tel-input';
 export class SigninPage implements OnInit {
 
   @ViewChild('ngOtpInput', { static: false }) ngOtpInput: any;
+
+  countryIsoCodes=['au','bd','bt','mm','ca','il','kw','my','np','qa','lk','gb','in','pk','us'];
+
   config = {
     allowNumbersOnly: true,
     length: 4,

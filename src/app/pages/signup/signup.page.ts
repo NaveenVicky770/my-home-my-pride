@@ -24,7 +24,7 @@ export class SignupPage implements OnInit {
   userName: any;
   phoneNo: any;
   email: any;
-  pre
+  countryIsoCodes=['au','bd','bt','mm','ca','il','kw','my','np','qa','lk','gb','in','pk','us'];
 
   constructor(
     private apiService: ApiService,
