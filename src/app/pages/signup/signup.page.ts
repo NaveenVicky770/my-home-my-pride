@@ -13,6 +13,9 @@ import { IonIntlTelInputValidators } from 'ion-intl-tel-input';
 })
 export class SignupPage implements OnInit {
 
+  // form: FormGroup;
+
+  // loginForm: FormGroup;
 
   formValue = {phoneNumber: '', test: ''};
   form: FormGroup;
@@ -21,8 +24,7 @@ export class SignupPage implements OnInit {
   userName: any;
   phoneNo: any;
   email: any;
-
-  countries = ['in','pk'];
+  pre
 
   constructor(
     private apiService: ApiService,
