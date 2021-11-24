@@ -22,7 +22,7 @@
     </ion-text>
   </div>
 
-  <ion-card class="ion-margin ion-padding-bottom">
+  <!-- <ion-card class="ion-margin ion-padding-bottom">
     <ion-card-header class="pb-0">
       <ion-card-title color="primary" class="ion-margin-bottom login-card"
         >Add Location</ion-card-title
@@ -175,8 +175,13 @@
       </ion-item>
     </ion-list>
 
-    <div class="container">
-      <ion-button color="primary" routerLink="/payments">Add Location</ion-button>
+    <div class="container text-center">
+      <ion-button color="primary" (click)="addLocation()" routerLink="/payments">Add Location</ion-button>
     </div>
-  </ion-card>
+  </ion-card> -->
+
+  <app-location-picker></app-location-picker>
+
+  <app-image-picker></app-image-picker>
+
 </ion-content>

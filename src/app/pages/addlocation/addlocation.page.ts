@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { MapModalComponent } from 'src/app/components/map-modal/map-modal.component';
 
 @Component({
   selector: 'app-addlocation',
@@ -20,9 +23,17 @@ export class AddlocationPage implements OnInit {
   states=['Andhra Pradesh','Tamil Nadu','Karntaka'];
   districts=['Chittor','Kadapa','Hyderabad'];
 
+  locationData=[];
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  addLocation(){
+    //
+  }
+
+
 
 }
