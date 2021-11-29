@@ -20,6 +20,11 @@ export class AppComponent implements OnInit {
       icon: 'home-outline',
     },
     {
+      title: 'Make Payment Page',
+      url: 'multilocations-payment',
+      icon: '',
+    },
+    {
       title: 'Show Location',
       url: 'showlocation',
       icon: 'location',
