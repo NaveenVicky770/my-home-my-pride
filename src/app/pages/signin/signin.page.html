@@ -19,7 +19,6 @@
     <div class="login-main">
       <app-header-text-logo></app-header-text-logo>
 
-
       <ion-card class="ion-margin">
         <ion-card-header class="ion-no-margin">
           <ion-card-title color="primary" class="ion-margin-bottom login-card"
@@ -128,7 +127,11 @@
                 </div>
               </ion-list>
               <div class="welcome-buttons">
-                <ion-button class="signup" type="button" (click)="userLogin()"
+                <ion-button
+                  class="signup"
+                  type="button"
+                  (click)="userLogin()"
+                  [disabled]="!form.valid"
                   >Submit</ion-button
                 >
               </div>

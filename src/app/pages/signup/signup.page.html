@@ -43,18 +43,6 @@
                 </ion-text>
               </ng-container>
 
-              <!-- <ion-item class="ion-activated">
-                <ion-label position="floating">Mobile No</ion-label>
-                <ion-input
-                  formControlName="phoneNo"
-                  [(ngModel)]="phoneNo"
-                  placeholder="Enter Mobile No"
-                  maxlength="10"
-                  minlength="10"
-                  type="tel"
-                  required
-                ></ion-input>
-              </ion-item> -->
 
               <ion-item>
                 <ion-intl-tel-input
@@ -115,6 +103,7 @@
 
               <div class="text-center ion-margin-top">
                 <ion-button color="primary" (click)="signUp()"
+                [disabled]="!form.valid"
                   >Register</ion-button
                 >
               </div>
