@@ -3,10 +3,12 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button
+        icon="chevron-back-outline"
         *ngIf="currentFragment==='mobile'"
         defaultHref="home"
       ></ion-back-button>
       <ion-button
+        icon="chevron-back-outline"
         *ngIf="currentFragment==='otp'"
         (click)="currentFragment='mobile'"
         >Back</ion-button
