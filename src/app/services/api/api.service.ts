@@ -22,5 +22,4 @@ export class ApiService {
     return window.localStorage.getItem('users');
   }
 
-  
 }
