@@ -1,11 +1,4 @@
-<!-- Back button with a default href -->
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar-top></app-toolbar-top>
 <ion-content>
   <div>
     <div class="login-main">
@@ -56,26 +49,10 @@
               </ion-item>
 
               <div *ngIf="phoneNumber.invalid && phoneNumber.touched">
-                <!-- <ion-text color="danger" *ngIf="phoneNumber.errors.required">
-                  <p class="ion-no-margin"><sub>Phone is required.</sub></p>
-                </ion-text> -->
                 <ion-text color="danger" *ngIf="phoneNumber.errors.phone">
                   <p class="ion-no-margin"><sub>Phone number is not valid.</sub></p>
                 </ion-text>
               </div>
-
-              <!-- <ng-container
-                *ngIf="!form.get('phoneNumber').valid && form.get('phoneNumber').touched"
-              >
-                <ion-text class="text-danger">
-                  <ion-text *ngIf="form.controls.phoneNo.errors.required">
-                    <p>Mobile Number is required</p>
-                  </ion-text>
-                  <ion-text *ngIf="form.controls.phoneNo.errors.minlength">
-                    <p>Should be atleast 10 digits</p>
-                  </ion-text>
-                </ion-text>
-              </ng-container> -->
 
               <ion-item class="ion-activated">
                 <ion-label position="floating">Email</ion-label>
