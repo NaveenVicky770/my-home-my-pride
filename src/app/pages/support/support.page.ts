@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ApiService } from 'src/app/services/api/api.service';
 
 
 @Component({
@@ -8,17 +9,16 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
   styleUrls: ['./support.page.scss'],
 })
 export class SupportPage implements OnInit {
-  constructor( ) { }
+  constructor(
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
   }
 
-  // call(){
-  //   this.callNumber.callNumber('9505444749', true)
-  // .then(res => console.log('Launched dialer!', res))
-  // .catch(err => console.log('Error launching dialer', err));
-  // }
-
-
+  sendMailToSupport(mailAdress){
+    //code to mail
+    this.apiService.sendMail(mailAdress);
+  }
 
 }

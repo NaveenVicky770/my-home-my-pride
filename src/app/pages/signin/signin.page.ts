@@ -135,40 +135,6 @@ export class SigninPage implements OnInit {
       this.commonService.presentAlert(this.errorMsg, 'error');
       console.log('two');
     }
-
-
-
-
-
-
-    // this.commonService.presentLoading();
-    // this.apiService.UserLogin({ mobile_number: this.mobileno, otp: this.otp }).subscribe(resObj => {
-    //   // this.commonService.hideLoading();
-    //   if (resObj.status == 1) {
-    //     if (typeof resObj.otp != 'undefined') {
-    //       this.currentFragment = 'otp';
-    //       this.StartTimer(3);
-    //       this.commonService.presentToast('OTP sent','text-white',2500,'bottom');
-    //     }
-    //     else {
-    //       if (resObj.user_data.user_id && resObj.user_data.user_id != '') {
-    //         window.localStorage.setItem('isLoggedIn', '1');
-    //         window.localStorage.setItem('user_id', resObj.user_data.user_id);
-    //         window.localStorage.setItem('user_name', resObj.user_data.name);
-    //         this.commonService.isUserLoggedIn.next(true);
-    //         this.commonService.presentToast('Login Successful','',2000,'bottom');
-    //         this.router.navigateByUrl('/home');
-
-    //       }
-    //       else {
-    //         this.commonService.presentAlert('User details not found', 'error');
-    //       }
-    //     }
-    //   }
-    //   else {
-    //     this.commonService.presentAlert(resObj.message, 'error');
-    //   }
-    // });
   }
 
   ionViewWillEnter(){
@@ -176,7 +142,6 @@ export class SigninPage implements OnInit {
     window.localStorage.removeItem('user_id');
     window.localStorage.removeItem('user_name');
     this.commonService.isUserLoggedIn.next(false);
-    // alert('Will ENter');
   }
 
   ionViewDidEnter() {
@@ -188,19 +153,6 @@ export class SigninPage implements OnInit {
   resendOtp() {
     this.commonService.presentToast('OTP Sent Successfully','success');
     this.StartTimer(30);
-    // this.commonService.presentLoading();
-    // this.apiService.ResendOTP({ mobile_number: this.mobileno, type: 'login' }).subscribe(resObj => {
-    //   if(resObj.status == 1)
-    //   {
-    //     this.commonService.presentToast(resObj.message,'success');
-    //     this.StartTimer(30);
-    //   }
-    //   else
-    //   {
-    //     this.commonService.presentToast(resObj.message,'error');
-    //   }
-    //   // this.commonService.hideLoading();
-    // });
   }
 
   VerifyLogin(){
@@ -224,7 +176,6 @@ export class SigninPage implements OnInit {
   StartTimer(seconds) {
     this.otpcounter = seconds;
     const interval = setInterval(() => {
-     // console.log(this.otpcounter);
       this.otpcounter--;
       if (this.otpcounter == 0) {
         clearInterval(interval);
