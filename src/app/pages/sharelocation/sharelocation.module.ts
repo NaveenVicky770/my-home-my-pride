@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SharelocationPageRoutingModule } from './sharelocation-routing.module';
 
 import { SharelocationPage } from './sharelocation.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SharelocationPageRoutingModule
+    SharelocationPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [SharelocationPage]
 })

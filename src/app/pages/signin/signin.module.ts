@@ -11,6 +11,7 @@ import { SigninPage } from './signin.page';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { IonIntlTelInputModule } from 'ion-intl-tel-input';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { IonIntlTelInputModule } from 'ion-intl-tel-input';
     NgOtpInputModule,
     ReactiveFormsModule,
     IonicSelectableModule,
+    ComponentsModule
   ],
   declarations: [SigninPage]
 })

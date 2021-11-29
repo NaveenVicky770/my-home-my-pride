@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { EditlocationPageRoutingModule } from './editlocation-routing.module';
 
 import { EditlocationPage } from './editlocation.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditlocationPageRoutingModule
+    EditlocationPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [EditlocationPage]
 })

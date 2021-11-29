@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header/header.component';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
 import { MapModalComponent } from './map-modal/map-modal.component';
 import { IonicModule } from '@ionic/angular';
 import { ImagePickerComponent } from './image-picker/image-picker.component';
+import { HeaderTextLogoComponent } from './header-text-logo/header-text-logo.component';
 
 @NgModule({
   declarations: [
     LocationPickerComponent,
     MapModalComponent,
     ImagePickerComponent,
-    HeaderComponent
+    HeaderTextLogoComponent
   ],
   imports: [CommonModule, IonicModule],
-  exports: [HeaderComponent, LocationPickerComponent, MapModalComponent,ImagePickerComponent],
+  exports: [ LocationPickerComponent, MapModalComponent,ImagePickerComponent, HeaderTextLogoComponent],
   entryComponents: [
-    HeaderComponent,
     LocationPickerComponent,
     MapModalComponent,
   ],

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { VisibilityPageRoutingModule } from './visibility-routing.module';
 
 import { VisibilityPage } from './visibility.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VisibilityPageRoutingModule
+    VisibilityPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [VisibilityPage]
 })

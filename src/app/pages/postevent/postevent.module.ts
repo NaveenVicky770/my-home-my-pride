@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PosteventPageRoutingModule } from './postevent-routing.module';
 
 import { PosteventPage } from './postevent.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PosteventPageRoutingModule
+    PosteventPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [PosteventPage]
 })

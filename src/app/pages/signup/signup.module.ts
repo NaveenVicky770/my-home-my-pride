@@ -11,6 +11,7 @@ import { SignupPage } from './signup.page';
 import { CommonService } from 'src/app/services/common/common.service';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { IonIntlTelInputModule } from 'ion-intl-tel-input';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { IonIntlTelInputModule } from 'ion-intl-tel-input';
     SignupPageRoutingModule,
     ReactiveFormsModule,
     IonicSelectableModule,
-    IonIntlTelInputModule
+    IonIntlTelInputModule,
+    ComponentsModule
   ],
   declarations: [SignupPage]
 })
