@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  googleMapsApiKey: 'AIzaSyD6r7tNBGz2pI3GmyOhDEXcj1QQtiKppSE'
+  googleMapsApiKey: 'AIzaSyCukoUWZ00j9dGUUrkaOxj0oAxAlxbFNkM'
 };
 
 /*

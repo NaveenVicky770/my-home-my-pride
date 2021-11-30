@@ -23,6 +23,6 @@ import { ToolbarTopComponent } from './toolbar-top/toolbar-top.component';
     HeaderTextLogoComponent,
     ToolbarTopComponent,
   ],
-  entryComponents: [LocationPickerComponent, MapModalComponent],
+  entryComponents: [MapModalComponent],
 })
 export class ComponentsModule {}
