@@ -78,6 +78,10 @@ export class AddlocationPage implements OnInit {
 
 
     });
+
+    // this.currentUser = this.apiService.getCurrentUser();
+    // console.log(this.currentUser.userName);
+    // console.log('check');
   }
 
   addLocation(){
@@ -93,4 +97,7 @@ export class AddlocationPage implements OnInit {
 
 
 
+
+
 }
+

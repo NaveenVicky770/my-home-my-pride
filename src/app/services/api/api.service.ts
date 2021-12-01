@@ -22,4 +22,8 @@ export class ApiService {
     return window.localStorage.getItem('users');
   }
 
+  getCurrentUser(){
+    return {userName: 'Naveen', mobile: '9505',email: 'nnk@gmail.com'};
+  }
+
 }

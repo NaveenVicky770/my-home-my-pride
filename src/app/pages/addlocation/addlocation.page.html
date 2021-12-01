@@ -15,8 +15,6 @@
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Name</ion-label>
           <ion-input
-            [(ngModel)]="userName"
-            [ngModelOptions]="{standalone: true}"
             class="form-control ion-margin-top ion-padding"
             type="text"
             value="Naveen Vicky"
@@ -27,8 +25,6 @@
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Mobile</ion-label>
           <ion-input
-            [(ngModel)]="mobileNo"
-            [ngModelOptions]="{standalone: true}"
             class="form-control ion-margin-top"
             type="text"
             value="9505444749"
@@ -39,8 +35,6 @@
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Email</ion-label>
           <ion-input
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="email"
             class="form-control ion-margin-top"
             type="text"
             value="vicky@gmail.com"
@@ -253,30 +247,27 @@
             >Upload Voice Direction<span class="text-danger">*</span></ion-label
           >
 
-          <ion-input
-            class="form-control ion-margin-top"
-            placeholder="  File Chosen"
-            type="text"
-            required
-          >
-
-          </ion-input>
           <ion-icon name="mic-outline" slot="end"></ion-icon>
-
+          <ion-input
+            class="ion-margin-top form-control-file"
+            type="file"
+            required
+            icon="mic-outline"
+          >
+          </ion-input>
         </ion-item>
-
       </ion-list>
     </form>
   </ion-card>
 
   <div class="container text-center mt-4">
+    <!-- [disabled]="!addLocationForm.valid" -->
     <ion-button
       color="primary"
-      [disabled]="!addLocationForm.valid"
+
       (click)="addLocation()"
       routerLink="/payments"
       >Add Location</ion-button
     >
   </div>
-
 </ion-content>
