@@ -14,36 +14,23 @@
 
       <ion-item lines="none">
         <ion-label position="stacked" color="secondary">Name</ion-label>
-        <ion-input
-          class="ion-margin-top ion-padding"
-          value=" Naveen Kumar"
-          type="text"
-          disabled
-          required
-          color="primary"
-        ></ion-input>
+        <div class="disabled-form-fields">
+          <ion-text>{{currentUser.userName}}</ion-text>
+        </div>
       </ion-item>
 
       <ion-item lines="none">
         <ion-label position="stacked" color="secondary">Mobile</ion-label>
-        <ion-input
-          class="ion-margin-top"
-          value=" 9505444749"
-          type="text"
-          required
-          disabled
-        ></ion-input>
+        <div class="disabled-form-fields">
+          <ion-text>{{currentUser.mobile}}</ion-text>
+        </div>
       </ion-item>
 
       <ion-item lines="none">
         <ion-label position="stacked" color="secondary">Email</ion-label>
-        <ion-input
-          class="ion-margin-top"
-          value=" naveen@headrun.com"
-          type="text"
-          disabled
-          required
-        ></ion-input>
+        <div class="disabled-form-fields">
+          <ion-text>{{currentUser.email}}</ion-text>
+        </div>
       </ion-item>
 
       <ion-item lines="none">

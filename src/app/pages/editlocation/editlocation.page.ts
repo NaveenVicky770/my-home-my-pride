@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-editlocation',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editlocation.page.scss'],
 })
 export class EditlocationPage implements OnInit {
+
+  currentUser;
 
   customPopoverOptions: any = {
     message: 'Select a Country'
@@ -20,9 +23,12 @@ export class EditlocationPage implements OnInit {
   states=['Andhra Pradesh','Tamil Nadu','Karntaka'];
   districts=['Chittor','Kadapa','Hyderabad'];
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
+    this.currentUser = this.apiService.getCurrentUser();
   }
 
 }

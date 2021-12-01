@@ -23,7 +23,7 @@ export class ApiService {
   }
 
   getCurrentUser(){
-    return {userName: 'Naveen', mobile: '9505',email: 'nnk@gmail.com'};
+    return {userName: 'Naveen', mobile: '9505444749',email: 'nnk@gmail.com'};
   }
 
 }

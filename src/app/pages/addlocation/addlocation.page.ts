@@ -14,6 +14,7 @@ export class AddlocationPage implements OnInit {
 
   location: any;
   addLocationForm: FormGroup;
+  currentUser;
 
   customPopoverOptions: any = {
     message: 'Select a Country'
@@ -46,21 +47,6 @@ export class AddlocationPage implements OnInit {
   ngOnInit() {
     this.addLocationForm = new FormGroup({
 
-      userName: new FormControl(null,{
-        updateOn: 'change',
-        validators: [Validators.required]
-      }),
-
-      mobileNo: new FormControl(null,{
-        updateOn: 'change',
-        validators: [Validators.required]
-      }),
-
-      email: new FormControl(null,{
-        updateOn: 'change',
-        validators: [Validators.required]
-      }),
-
       houseNameNew: new FormControl(null,{
         updateOn: 'change',
         validators: [Validators.required]
@@ -79,9 +65,9 @@ export class AddlocationPage implements OnInit {
 
     });
 
-    // this.currentUser = this.apiService.getCurrentUser();
-    // console.log(this.currentUser.userName);
-    // console.log('check');
+    this.currentUser = this.apiService.getCurrentUser();
+    console.log(this.currentUser.userName);
+    console.log('check');
   }
 
   addLocation(){

@@ -1,9 +1,9 @@
 <app-toolbar-top></app-toolbar-top>
-
 <ion-content>
   <app-header-text-logo></app-header-text-logo>
 
   <ion-card class="ion-margin ion-padding-bottom">
+
     <ion-card-header class="pb-0">
       <ion-card-title color="primary" class="ion-margin-bottom login-card"
         >Add Location</ion-card-title
@@ -12,34 +12,26 @@
 
     <form [formGroup]="addLocationForm">
       <ion-list class="pt-0">
+
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Name</ion-label>
-          <ion-input
-            class="form-control ion-margin-top ion-padding"
-            type="text"
-            value="Naveen Vicky"
-            disabled
-          ></ion-input>
+          <div class="disabled-form-fields">
+            <ion-text>{{currentUser.userName}}</ion-text>
+          </div>
         </ion-item>
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Mobile</ion-label>
-          <ion-input
-            class="form-control ion-margin-top"
-            type="text"
-            value="9505444749"
-            disabled
-          ></ion-input>
+          <div class="disabled-form-fields">
+            <ion-text>{{currentUser.mobile}}</ion-text>
+          </div>
         </ion-item>
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Email</ion-label>
-          <ion-input
-            class="form-control ion-margin-top"
-            type="text"
-            value="vicky@gmail.com"
-            disabled
-          ></ion-input>
+          <div class="disabled-form-fields">
+            <ion-text>{{currentUser.email}}</ion-text>
+          </div>
         </ion-item>
 
         <ion-item lines="none">
@@ -71,7 +63,8 @@
             placeholder="  Search for a house name"
             type="text"
             required
-          ></ion-input>
+          >
+          </ion-input>
         </ion-item>
 
         <ion-item lines="none" *ngIf="val === 'AddNewHouse'">
@@ -142,8 +135,8 @@
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary"
-            >Village/City/Town Name<span class="text-danger">*</span></ion-label
-          >
+            >Village/City/Town Name<span class="text-danger">*</span>
+          </ion-label>
           <ion-input
             [(ngModel)]="village"
             class="form-control ion-margin-top"
@@ -186,7 +179,8 @@
             placeholder="  Apartment name & Flat no"
             type="text"
             required
-          ></ion-input>
+          >
+          </ion-input>
         </ion-item>
 
         <ion-item lines="none">
@@ -204,8 +198,8 @@
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary"
-            >Identification Image<span class="text-danger">*</span></ion-label
-          >
+            >Identification Image<span class="text-danger">*</span>
+          </ion-label>
           <!-- <ion-input class="mt-2 form-control-file" placeholder="  Enter Location" type="file" required>
           </ion-input> -->
         </ion-item>
@@ -244,8 +238,8 @@
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary"
-            >Upload Voice Direction<span class="text-danger">*</span></ion-label
-          >
+            >Upload Voice Direction<span class="text-danger">*</span>
+          </ion-label>
 
           <ion-icon name="mic-outline" slot="end"></ion-icon>
           <ion-input
@@ -262,11 +256,7 @@
 
   <div class="container text-center mt-4">
     <!-- [disabled]="!addLocationForm.valid" -->
-    <ion-button
-      color="primary"
-
-      (click)="addLocation()"
-      routerLink="/payments"
+    <ion-button color="primary" (click)="addLocation()" routerLink="/payments"
       >Add Location</ion-button
     >
   </div>
