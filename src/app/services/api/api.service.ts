@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-var */
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -35,9 +37,10 @@ export class ApiService {
     return this.getPostData('/login', requestData);
   }
 
-
   public addLocation(requestData) {
-    return this.getPostData('/add_location', requestData);
+    return this.http
+      .post(this.apiUrl + '/add_location', requestData)
+      .pipe(map(this.extractData), catchError(this.handleError));
   }
 
   public getUsers() {
@@ -75,5 +78,3 @@ export class ApiService {
     return errorarr;
   }
 }
-
-

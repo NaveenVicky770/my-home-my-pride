@@ -9,30 +9,39 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from  '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 // import { HeaderComponent } from './components/header/header/header.component';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { IonIntlTelInputModule } from 'ion-intl-tel-input';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { enterAnimation } from './animations/animation';
 
+import { HttpConfigInterceptor } from './interceptors/httpconfig.interceptor';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
     IonicModule.forRoot({
       backButtonText: '',
-      navAnimation: enterAnimation
+      navAnimation: enterAnimation,
     }),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgxSpinnerModule,
     IonIntlTelInputModule,
-    IonicSelectableModule
+    IonicSelectableModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true,
+    },
   ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
