@@ -102,15 +102,14 @@ export class SignupPage implements OnInit {
   // }
 
   userRegister() {
-    console.log(this.phoneNo.nationalNumber);
     // this.commonService.presentLoading();
-
+    const phone_no = (this.phoneNo.nationalNumber).replace(/\s/g,'');
     this.apiService
       .userRegister({
-        name: 'Suresh Amara',
+        name: this.userName,
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        phone_no: this.phoneNo.nationalNumber,
-        email: 'amarasuresh461@gmail.com',
+        phone_no,
+        email: this.email,
       })
       .subscribe((resObj) => {
         // this.commonService.hideLoading();

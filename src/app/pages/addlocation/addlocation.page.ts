@@ -78,6 +78,11 @@ export class AddlocationPage implements OnInit {
       houseName: this.houseNameNew
     };
     console.log(this.location);
+
+    this.apiService.addLocation({})
+
+
+
     this.router.navigateByUrl('/payments');
   }
 
