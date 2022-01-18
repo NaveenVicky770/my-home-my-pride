@@ -77,9 +77,12 @@ export class SigninPage implements OnInit {
   // }
 
   sendOtp(){
-    this.apiService.userLogin({"phone_no":"9505444777"})
+    this.apiService.userLogin({"phone_no":"095054 44749"})
     .subscribe((resObj)=>{
       console.log(resObj);
+      if(resObj.message === 'Verification code sent to your mobile no'){
+        this.showOtpFragment();
+      }
     });
   }
 
@@ -92,10 +95,20 @@ export class SigninPage implements OnInit {
     this.currentFragment = 'otp';
   }
 
+  verifyOtpAndGetToken(phone_no,d_1,d_2,d_3,d_4){
+    const reqData = {phone_no,"digit_1":d_1,"digit_2":d_2,"digit_3":d_3,"digit_4":d_4};
+
+    this.apiService.verifyOtp(reqData).subscribe((resObj)=>{
+      console.log(resObj);
+    });
+  }
+
   userLogin(){
     if(!this.form.valid){
       return;
     }
+
+    console.log(this.otp);
 
     if (this.otp) {
       if (this.otp == '') {
@@ -107,23 +120,21 @@ export class SigninPage implements OnInit {
       } else if (this.otp.toString().length == 4) {
         this.errorMsg = "";
         console.log(this.mobileno);
-        window.localStorage.setItem('isLoggedIn', '1');
-        window.localStorage.setItem('user_id',Math.random().toString());
-        window.localStorage.setItem('user_name', 'Naveen_static_name_for_now');
-        this.commonService.isUserLoggedIn.next(true);
-        this.commonService.presentToast('Login Successful','',2000,'bottom');
-        this.router.navigateByUrl('/home');
+
+        this.verifyOtpAndGetToken("9493443637","1","1","1","1");
+
+
+
+        // window.localStorage.setItem('isLoggedIn', '1');
+        // this.commonService.isUserLoggedIn.next(true);
+        // this.commonService.presentToast('Login Successful','',2000,'bottom');
+        // this.router.navigateByUrl('/home');
       } else {
         this.errorMsg = "Please enter otp";
       }
-
-
-      console.log('one');
-
     } else {
       this.errorMsg = "Please enter otp";
       this.commonService.presentAlert(this.errorMsg, 'error');
-      console.log('two');
     }
   }
 

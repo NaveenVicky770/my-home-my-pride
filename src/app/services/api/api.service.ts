@@ -8,7 +8,8 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class ApiService {
   users = [];
-  apiUrl = 'https://presentience-clients.in/myhome_mypride/restapi';
+  // apiUrl = 'https://presentience-clients.in/myhome_mypride/restapi';
+  apiUrl = 'http://localhost:30/myhome_mypride/restapi';
 
   constructor(private http: HttpClient) {}
   sendMail(mail) {
@@ -34,6 +35,11 @@ export class ApiService {
     return this.getPostData('/login', requestData);
   }
 
+
+  public addLocation(requestData) {
+    return this.getPostData('/add_location', requestData);
+  }
+
   public getUsers() {
     return window.localStorage.getItem('users');
   }
@@ -43,7 +49,7 @@ export class ApiService {
   }
 
   private extractData(res: Response) {
-    console.log('Response', res);
+    console.log('Response Block=====>', res);
     const body = res;
     return body || {};
   }

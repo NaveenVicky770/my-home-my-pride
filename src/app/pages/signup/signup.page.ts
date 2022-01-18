@@ -136,6 +136,12 @@ export class SignupPage implements OnInit {
           },2000);
         } else {
           console.log('User Already Exists');
+          this.commonService.presentToast(
+            'User Already Exists,Please Login',
+            '',
+            2000,
+            'bottom'
+          );
         }
         // if (resObj.status == 1 && resObj.otp) {
         //   this.currentFragment = 'otp';
