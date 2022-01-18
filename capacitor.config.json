@@ -1,6 +1,6 @@
 {
-	"appId": "com.ionic.mhmp",
-	"appName": "My Home My Pride",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "com.ionic.mhmp",
+  "appName": "My Home My Pride",
+  "webDir": "www",
+  "bundledWebRuntime": false
 }

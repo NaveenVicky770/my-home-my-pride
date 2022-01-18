@@ -76,30 +76,20 @@ export class SigninPage implements OnInit {
   //   console.log(this.phoneNumber.value);
   // }
 
+  sendOtp(){
+    this.apiService.userLogin({"phone_no":"9505444777"})
+    .subscribe((resObj)=>{
+      console.log(resObj);
+    });
+  }
+
 
   showOtpFragment(){
-    let userFound=false;
     if(!this.form.valid){
       console.log('Form not Valid');
       return;
     }
-
-    const users = (JSON.parse(this.apiService.getUsers()));
-    console.log('check');
-
-    users.forEach(user => {
-      console.log(this.mobileno.nationalNumber,user.phoneNo);
-      if(user.phoneNo == this.mobileno.nationalNumber){
-        this.currentFragment = 'otp';
-        this.StartTimer(3);
-        this.commonService.presentToast('OTP sent','text-white',2500,'bottom');
-        userFound=true;
-      }
-    });
-    if(!userFound){
-      this.commonService.presentAlert('User details not found', 'error');
-    }
-
+    this.currentFragment = 'otp';
   }
 
   userLogin(){

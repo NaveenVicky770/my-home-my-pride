@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 import { ImagePickerComponent } from './image-picker/image-picker.component';
 import { HeaderTextLogoComponent } from './header-text-logo/header-text-logo.component';
 import { ToolbarTopComponent } from './toolbar-top/toolbar-top.component';
+import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   declarations: [
@@ -14,14 +16,16 @@ import { ToolbarTopComponent } from './toolbar-top/toolbar-top.component';
     ImagePickerComponent,
     HeaderTextLogoComponent,
     ToolbarTopComponent,
+    VerifyOtpComponent,
   ],
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, NgOtpInputModule],
   exports: [
     LocationPickerComponent,
     MapModalComponent,
     ImagePickerComponent,
     HeaderTextLogoComponent,
     ToolbarTopComponent,
+    VerifyOtpComponent
   ],
   entryComponents: [MapModalComponent],
 })

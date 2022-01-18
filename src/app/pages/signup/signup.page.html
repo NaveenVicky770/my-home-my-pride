@@ -1,22 +1,19 @@
 <app-toolbar-top></app-toolbar-top>
 <ion-content>
-  <div>
-    <div class="login-main">
-
-      <app-header-text-logo></app-header-text-logo>
-
-      <ion-card class="ion-margin">
-        <ion-card-header class="ion-no-margin">
-          <ion-card-title color="primary" class="ion-margin-bottom login-card"
-            >Register</ion-card-title
-          >
-          <ion-card-subtitle
-            >You'll receive code to verify your mobile number</ion-card-subtitle
-          >
-        </ion-card-header>
-
-        <ion-card-content class="ion-no-margin">
-          <form [formGroup]="form">
+  <div class="login-main">
+    <app-header-text-logo></app-header-text-logo>
+    <ion-card class="ion-margin">
+      <ion-card-header class="ion-no-margin">
+        <ion-card-title color="primary" class="ion-margin-bottom login-card"
+          >Register</ion-card-title
+        >
+        <ion-card-subtitle
+          >You'll receive code to verify your mobile number</ion-card-subtitle
+        >
+      </ion-card-header>
+      <ion-card-content class="ion-no-margin">
+        <form [formGroup]="form">
+          <div *ngIf="currentFragment === 'mobile'">
             <ion-list>
               <ion-item class="ion-activated">
                 <ion-label position="floating">Name</ion-label>
@@ -36,7 +33,6 @@
                 </ion-text>
               </ng-container>
 
-
               <ion-item>
                 <ion-intl-tel-input
                   [(ngModel)]="phoneNo"
@@ -44,13 +40,15 @@
                   formControlName="phoneNumber"
                   [onlyCountries]="countryIsoCodes"
                   modalCssClass="countryCode"
-                   >
+                >
                 </ion-intl-tel-input>
               </ion-item>
 
               <div *ngIf="phoneNumber.invalid && phoneNumber.touched">
                 <ion-text color="danger" *ngIf="phoneNumber.errors.phone">
-                  <p class="ion-no-margin"><sub>Phone number is not valid.</sub></p>
+                  <p class="ion-no-margin">
+                    <sub>Phone number is not valid.</sub>
+                  </p>
                 </ion-text>
               </div>
 
@@ -62,7 +60,8 @@
                   placeholder="Enter Email"
                   type="text"
                   required
-                ></ion-input>
+                >
+                </ion-input>
               </ion-item>
               <ng-container
                 *ngIf="!form.get('email').valid && form.get('email').touched"
@@ -77,10 +76,11 @@
                 </ion-text>
               </ng-container>
 
-
               <div class="text-center ion-margin-top">
-                <ion-button color="primary" (click)="signUp()"
-                [disabled]="!form.valid"
+                <ion-button
+                  color="primary"
+                  (click)="userRegister()"
+                  [disabled]="!form.valid"
                   >Register</ion-button
                 >
               </div>
@@ -94,9 +94,15 @@
 
               <!-- <ion-text class="ion-text-center" color="danger">{{"error here"}}</ion-text> -->
             </ion-list>
-          </form>
-        </ion-card-content>
-      </ion-card>
-    </div>
+          </div>
+          <!-- <div *ngIf="currentFragment === 'otp'">
+            <app-verify-otp></app-verify-otp>
+            <div class="welcome-buttons">
+                <button class="signup" type="submit" (click)="verifyOtp()">Register</button>
+            </div>
+          </div> -->
+        </form>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

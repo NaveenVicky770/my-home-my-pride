@@ -31,9 +31,11 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss",
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
               "node_modules\\flag-icon-css\\sass\\flag-icons.scss",
-              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css"
             ],
             "scripts": [],
             "aot": false,
@@ -125,10 +127,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {

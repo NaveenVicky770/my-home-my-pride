@@ -101,33 +101,14 @@
                   class="signup"
                   color="primary"
                   type="button"
-                  (click)="showOtpFragment()"
+                  (click)="sendOtp()"
                   >Send OTP</ion-button
                 >
               </ion-list>
             </form>
 
             <ion-list class="ion-text-center" *ngIf="currentFragment === 'otp'">
-              <ion-list>
-                <div class="otp-conc">
-                  <ng-otp-input
-                    #ngOtpInput
-                    (onInputChange)="onOtpChange($event)"
-                    *ngIf="showOtpComponent"
-                    [config]="config"
-                    type="number"
-                    pattern="[0-9]*"
-                  ></ng-otp-input>
-
-                  <br />
-                  <ion-text
-                    *ngIf="this.otpcounter> 0"
-                    color="danger"
-                    class="resend-otp ion-margin-top"
-                    >Resend Otp in ({{this.otpcounter}} s)</ion-text
-                  >
-                </div>
-              </ion-list>
+              <app-verify-otp></app-verify-otp>
               <div class="welcome-buttons">
                 <ion-button
                   class="signup"
