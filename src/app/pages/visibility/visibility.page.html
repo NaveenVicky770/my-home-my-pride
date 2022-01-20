@@ -8,26 +8,26 @@
       <ion-card-title color="primary" class="ion-margin-bottom login-card"
         >Manage Visibility</ion-card-title
       >
-      <ion-card-subtitle
-        >Visibility Status</ion-card-subtitle
-      >
+      <ion-card-subtitle>Visibility Status</ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content class="ion-no-margin" >
+    <ion-card-content class="ion-no-margin">
       <ion-list>
         <ion-select
-        class="shadow ion-margin"
+          class="shadow ion-margin"
           [interfaceOptions]="customPopoverOptions"
           interface="popover"
           placeholder="Select Location"
+          (click)="getVisibility()"
         >
-          <ion-select-option
-            *ngFor="let option of locations"
-            value="{{option}}"
+          <ion-select-option *ngFor="let option of locations" value="{{option}}"
             >{{option}}</ion-select-option
           >
         </ion-select>
       </ion-list>
+      <div class="ion-text-right" *ngIf="locationSelected">
+        <ion-toggle color="primary"></ion-toggle>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

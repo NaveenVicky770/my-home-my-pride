@@ -11,10 +11,16 @@ export class VisibilityPage implements OnInit {
     message: 'Select location to set visibility status'
   };
   locations=['location1','location2','location3'];
+  locationSelected=false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getVisibility(){
+    console.log('Invoke');
+    this.locationSelected=true;
   }
 
 }
