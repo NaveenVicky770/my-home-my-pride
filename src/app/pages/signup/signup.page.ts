@@ -103,6 +103,7 @@ export class SignupPage implements OnInit {
 
   userRegister() {
     // this.commonService.presentLoading();
+    console.log(this.phoneNo);
     const phone_no = (this.phoneNo.nationalNumber).replace(/\s/g,'');
     this.apiService
       .userRegister({

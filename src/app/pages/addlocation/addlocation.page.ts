@@ -26,17 +26,24 @@ export class AddlocationPage implements OnInit {
   customDistrictPopoverOptions: any = {
     message: 'Select a District',
   };
+  customExistingHousePopoverOptions: any = {
+    message: 'Select a House Name',
+  };
+
   countries = ['India', 'China', 'USA'];
   states = ['Andhra Pradesh', 'Tamil Nadu', 'Karntaka'];
   districts = ['Chittor', 'Kadapa', 'Hyderabad'];
+  existingHouseNames =['House1','House2'];
 
   locationData = {};
   userName: any;
   mobileNo: any;
   email: any;
-  houseNameNew: any;
+  newHouseName: any;
   village: any;
   area: any;
+  doorPlotNo: any;
+  apartment: any;
 
   val = '';
 
@@ -44,7 +51,7 @@ export class AddlocationPage implements OnInit {
 
   ngOnInit() {
     this.addLocationForm = new FormGroup({
-      houseNameNew: new FormControl(null, {
+      newHouseName: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required],
       }),
@@ -58,11 +65,22 @@ export class AddlocationPage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required],
       }),
+
+      doorPlotNo: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
+
+      apartment: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
     });
 
     this.currentUser = this.apiService.getCurrentUser();
+    console.log(this.currentUser);
     console.log(this.currentUser.userName);
-    console.log('check');
+
   }
 
   addLocation() {
@@ -70,23 +88,23 @@ export class AddlocationPage implements OnInit {
     this.location = {
       name: this.userName,
       mobileNo: this.mobileNo,
-      houseName: this.houseNameNew,
+      houseName: this.newHouseName,
     };
     console.log(this.location);
 
     this.apiService.addLocation({
-      name: 'Sadsa',
-      phone_no: 9493443637,
-      email: 'amarasuresh461@gmail.com',
-      existing_house_name: 'test',
-      new_house_name: 'Ggg',
-      country: 'IND',
+      name: this.currentUser.userName,
+      phone_no: this.currentUser.mobile,
+      email: this.currentUser.email,
+      existing_house_name: 'existing One',
+      new_house_name: this.newHouseName,
+      country: this.currentUser.countryName,
       state: 'AP',
       district: 'GNT',
-      village_city_town: 'GGt',
-      area: 'CCT',
-      door_plot_no: 154,
-      apartement: 'FD',
+      village_city_town: this.village,
+      area: this.area,
+      door_plot_no: this.doorPlotNo,
+      apartement: this.apartment,
       location: 'Aqwe',
       voice_direction: 'asdas',
     }).subscribe((resObj)=>{
