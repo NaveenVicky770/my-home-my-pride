@@ -111,6 +111,7 @@ export class SignupPage implements OnInit {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         phone_no,
         email: this.email,
+        country_id: this.phoneNo.dialCode
       })
       .subscribe((resObj) => {
         // this.commonService.hideLoading();
@@ -131,7 +132,7 @@ export class SignupPage implements OnInit {
               'You can Login Now',
               '',
               2000,
-              'bottom'
+              'top'
             );
           },2000);
         } else {

@@ -25,6 +25,12 @@ export class ApiService {
       .pipe(map(this.extractData), catchError(this.handleError));
   }
 
+  getGetData(methodName) {
+    return this.http
+      .get(this.apiUrl + methodName)
+      .pipe(map(this.extractData), catchError(this.handleError));
+  }
+
   public userRegister(requestData) {
     return this.getPostData('/signup', requestData);
   }
@@ -38,17 +44,11 @@ export class ApiService {
   }
 
   public addLocation(requestData) {
-    return this.http
-      .post(this.apiUrl + '/add_location', requestData)
-      .pipe(map(this.extractData), catchError(this.handleError));
+    return this.getPostData('/add_location', requestData);
   }
 
-  public getUsers() {
-    return window.localStorage.getItem('users');
-  }
-
-  getCurrentUser() {
-    return { userName: 'Naveen', mobile: '9505444749', email: 'nnk@gmail.com', countryName: 'India' };
+  public getCurrentUser() {
+    return this.getGetData('/get_current_user_details');
   }
 
   private extractData(res: Response) {

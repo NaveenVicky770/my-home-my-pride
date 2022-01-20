@@ -33,12 +33,13 @@ export class AddlocationPage implements OnInit {
   countries = ['India', 'China', 'USA'];
   states = ['Andhra Pradesh', 'Tamil Nadu', 'Karntaka'];
   districts = ['Chittor', 'Kadapa', 'Hyderabad'];
-  existingHouseNames =['House1','House2'];
+  existingHouseNames = ['House1', 'House2'];
 
   locationData = {};
   userName: any;
   mobileNo: any;
   email: any;
+  countryName: any;
   newHouseName: any;
   village: any;
   area: any;
@@ -47,7 +48,11 @@ export class AddlocationPage implements OnInit {
 
   val = '';
 
-  constructor(private apiService: ApiService, private router: Router, private commonService: CommonService) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private commonService: CommonService
+  ) {}
 
   ngOnInit() {
     this.addLocationForm = new FormGroup({
@@ -77,14 +82,17 @@ export class AddlocationPage implements OnInit {
       }),
     });
 
-    this.currentUser = this.apiService.getCurrentUser();
-    console.log(this.currentUser);
-    console.log(this.currentUser.userName);
-
+    this.apiService.getCurrentUser().subscribe((resObj) => {
+      this.currentUser = resObj.message;
+      console.log(this.currentUser);
+      this.userName=(this.currentUser.name);
+      this.email=(this.currentUser.email);
+      this.mobileNo=(this.currentUser.phone_no);
+      this.countryName=(this.currentUser.country_name);
+    });
   }
 
   addLocation() {
-    //
     this.location = {
       name: this.userName,
       mobileNo: this.mobileNo,
@@ -92,30 +100,32 @@ export class AddlocationPage implements OnInit {
     };
     console.log(this.location);
 
-    this.apiService.addLocation({
-      name: this.currentUser.userName,
-      phone_no: this.currentUser.mobile,
-      email: this.currentUser.email,
-      existing_house_name: 'existing One',
-      new_house_name: this.newHouseName,
-      country: this.currentUser.countryName,
-      state: 'AP',
-      district: 'GNT',
-      village_city_town: this.village,
-      area: this.area,
-      door_plot_no: this.doorPlotNo,
-      apartement: this.apartment,
-      location: 'Aqwe',
-      voice_direction: 'asdas',
-    }).subscribe((resObj)=>{
-      console.log(resObj);
-      this.commonService.presentToast(
-        'Location Added successfully',
-        '',
-        2000,
-        'bottom'
-      );
-    });
+    this.apiService
+      .addLocation({
+        name: this.currentUser.userName,
+        phone_no: this.currentUser.mobile,
+        email: this.currentUser.email,
+        existing_house_name: 'existing One',
+        new_house_name: this.newHouseName,
+        country: this.currentUser.countryName,
+        state: 'AP',
+        district: 'GNT',
+        village_city_town: this.village,
+        area: this.area,
+        door_plot_no: this.doorPlotNo,
+        apartement: this.apartment,
+        location: 'Aqwe',
+        voice_direction: 'asdas',
+      })
+      .subscribe((resObj) => {
+        console.log(resObj);
+        this.commonService.presentToast(
+          'Location Added successfully',
+          '',
+          2000,
+          'bottom'
+        );
+      });
 
     this.router.navigateByUrl('/payments');
   }

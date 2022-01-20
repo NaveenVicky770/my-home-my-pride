@@ -131,7 +131,7 @@ export class SigninPage implements OnInit {
 
     this.apiService.verifyOtp(reqData).subscribe((resObj) => {
       // console.log('Response Here==>',resObj);
-      if(resObj.message === 'OTP Verified.'){
+      if(resObj.message === 'OTP Verified successfully...'){
         this.commonService.presentToast(
           'OTP Verified',
           '',
@@ -140,6 +140,7 @@ export class SigninPage implements OnInit {
         );
 
         window.localStorage.setItem('isLoggedIn', '1');
+        window.localStorage.setItem('token', resObj.token);
         this.commonService.isUserLoggedIn.next(true);
         this.router.navigateByUrl('/home');
 

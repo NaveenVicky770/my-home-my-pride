@@ -21,7 +21,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // eslint-disable-next-line max-len
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNCIsIm5hbWUiOiJOYXZlZW4gVmlja3kiLCJwaG9uZV9ubyI6Ijk1MDU0NDQ3NDkiLCJ0aW1lU3RhbXAiOiIyMDIyLTAxLTE3IDIwOjA4OjIycG0ifQ.u82YskU9WU6K2F5gMPU2N6OjiLrr41P_HRP0LIQ8-tg';
+    const token = window.localStorage.getItem('token');
+
 
     //Authentication by setting header with token value
     if (token) {
