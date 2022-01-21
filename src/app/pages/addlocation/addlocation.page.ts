@@ -32,7 +32,7 @@ export class AddlocationPage implements OnInit {
 
   countries = ['India', 'China', 'USA'];
   states = [];
-  districts = ['Chittor', 'Kadapa', 'Hyderabad'];
+  districts = [];
   existingHouseNames = ['House1', 'House2'];
 
   locationData = {};
@@ -78,6 +78,11 @@ export class AddlocationPage implements OnInit {
       }),
 
       apartment: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
+
+      state: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required],
       }),
@@ -144,6 +149,13 @@ export class AddlocationPage implements OnInit {
   }
 
   getDistricts(event){
-    console.log(event.target.value);
+    this.districts=[];
+    const stateId=(event.target.value);
+    this.apiService.getDistricts(this.countryCode,stateId).subscribe((resObj)=>{
+      console.log(resObj.district);
+      resObj.district.forEach(element => {
+        this.districts.push(element.district_name);
+      });
+    });
   }
 }

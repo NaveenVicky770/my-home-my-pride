@@ -56,6 +56,10 @@ export class ApiService {
     return this.getGetData('/state?country_id='+countryCode);
   }
 
+  public getDistricts(countryId,stateId) {
+    return this.getGetData('/district?country_id='+countryId+'&state_id='+stateId);
+  }
+
   public searchHouses(searchText) {
     return this.getGetData('/search_houses?name='+searchText);
   }

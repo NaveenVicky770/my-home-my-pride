@@ -79,9 +79,10 @@
             interface="popover"
             placeholder=" Select a State"
             class="border ion-margin-top"
+            formControlName="state"
+            (ionChange)="getDistricts($event)"
           >
             <ion-select-option
-              (click)="getDistricts($event)"
               *ngFor="let option of states"
               value="{{option.state_id}}"
               >{{option.state_name}}</ion-select-option
