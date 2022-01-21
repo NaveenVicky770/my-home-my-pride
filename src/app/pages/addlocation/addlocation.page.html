@@ -3,7 +3,6 @@
   <app-header-text-logo></app-header-text-logo>
 
   <ion-card class="ion-margin ion-padding-bottom">
-
     <ion-card-header class="pb-0">
       <ion-card-title color="primary" class="ion-margin-bottom login-card"
         >Add Location</ion-card-title
@@ -12,7 +11,6 @@
 
     <form [formGroup]="addLocationForm">
       <ion-list class="pt-0">
-
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Name</ion-label>
           <div class="disabled-form-fields">
@@ -49,7 +47,7 @@
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary"
-            >Tag  Existing House Name (optional)</ion-label
+            >Tag Existing House Name (optional)</ion-label
           >
           <ion-select
             [interfaceOptions]="customExistingHousePopoverOptions"
@@ -57,7 +55,9 @@
             placeholder=" Select a House Name"
             class="border ion-margin-top"
           >
-            <ion-select-option *ngFor="let option of existingHouseNames" value="{{option}}"
+            <ion-select-option
+              *ngFor="let option of existingHouseNames"
+              value="{{option}}"
               >{{option}}</ion-select-option
             >
           </ion-select>
@@ -75,13 +75,15 @@
             >State<span class="text-danger">*</span></ion-label
           >
           <ion-select
-            (click)="getDistricts($event)"
             [interfaceOptions]="customStatePopoverOptions"
             interface="popover"
             placeholder=" Select a State"
             class="border ion-margin-top"
           >
-            <ion-select-option *ngFor="let option of states" value="{{option.state_id}}"
+            <ion-select-option
+              (click)="getDistricts($event)"
+              *ngFor="let option of states"
+              value="{{option.state_id}}"
               >{{option.state_name}}</ion-select-option
             >
           </ion-select>
@@ -137,7 +139,7 @@
             >Door No/Plot No<span class="text-danger">*</span></ion-label
           >
           <ion-input
-          [(ngModel)]="doorPlotNo"
+            [(ngModel)]="doorPlotNo"
             class="form-control ion-margin-top"
             placeholder="  Enter Details"
             type="text"
@@ -149,7 +151,7 @@
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Apartment</ion-label>
           <ion-input
-          [(ngModel)]="apartment"
+            [(ngModel)]="apartment"
             class="form-control ion-margin-top"
             placeholder="  Apartment name & Flat no"
             type="text"

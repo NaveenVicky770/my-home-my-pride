@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api/api.service';
 import { CommonService } from '../services/common/common.service';
 
 @Component({
@@ -19,69 +20,85 @@ export class HomePage implements OnInit {
     'Chaitanya',
   ];
   public isSignIn = window.localStorage.getItem('isLoggedIn');
-  filterTerm: string;
+  filterTerm: any;
 
   userRecords = [
-    {
-      id: 1,
-      name: 'Naveen Vicky',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 2,
-      name: 'Sasi',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 3,
-      name: 'Deepu',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 4,
-      name: 'Mohan',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 5,
-      name: 'Shabari',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 6,
-      name: 'Ravi',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 7,
-      name: 'Rajesh',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 8,
-      name: 'Nicholas',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 9,
-      name: 'Sasi Kiran',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
-    {
-      id: 10,
-      name: 'David',
-      url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
-    },
+    // {
+    //   id: 1,
+    //   name: 'Naveen Vicky',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 2,
+    //   name: 'Sasi',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 3,
+    //   name: 'Deepu',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 4,
+    //   name: 'Mohan',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 5,
+    //   name: 'Shabari',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 6,
+    //   name: 'Ravi',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 7,
+    //   name: 'Rajesh',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 8,
+    //   name: 'Nicholas',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 9,
+    //   name: 'Sasi Kiran',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
+    // {
+    //   id: 10,
+    //   name: 'David',
+    //   url: 'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+    // },
   ];
 
-  constructor(private commonService: CommonService) {}
+  constructor(
+    private commonService: CommonService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
-    //
+    // eslint-disable-next-line prefer-const
   }
 
-  search() {
+  search(event) {
     //search logic
+    const searchText = event.target.value;
+    if (searchText) {
+      this.apiService.searchHouses(searchText).subscribe((resObj) => {
+        console.log(resObj.List);
+        console.log(resObj.status);
+        this.userRecords = resObj.List;
+      },(err)=>{
+        console.log(err.error.message);
+      });
+    }
+    else{
+      this.userRecords=[{name:'no data found'}];
+    }
   }
 
   ionViewWillEnter() {

@@ -33,19 +33,22 @@
 
     <ion-row>
       <ion-searchbar
-        placeholder="Search for a house..."
+        (keyup)="search($event)"
+        placeholder="Start searching for a house..."
         [(ngModel)]="filterTerm"
         animated="true"
+        id="searchVal"
       ></ion-searchbar>
 
       <ion-col>
 
-        <ion-item *ngFor="let data of userRecords | filter:filterTerm" routerLink="/showlocation">
+        <ion-item *ngFor="let data of userRecords" routerLink="/showlocation">
 
           <ion-col size="4">
-            <ion-thumbnail>
+            <!-- <ion-thumbnail>
               <img src="{{data.url}}" />
-            </ion-thumbnail>
+            </ion-thumbnail> -->
+            <ion-label>{{data.user_id}}</ion-label>
           </ion-col>
 
           <ion-col size="8">

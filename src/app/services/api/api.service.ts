@@ -3,6 +3,7 @@
 /* eslint-disable no-var */
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -55,6 +56,10 @@ export class ApiService {
     return this.getGetData('/state?country_id='+countryCode);
   }
 
+  public searchHouses(searchText) {
+    return this.getGetData('/search_houses?name='+searchText);
+  }
+
   private extractData(res: Response) {
     console.log('Response Block=====>', res);
     const body = res;
@@ -78,7 +83,8 @@ export class ApiService {
     var errorarr = [];
     var errorobj = { error: '401', errorstatus: error.status };
     errorarr.push(errorobj);
-    //return throwError('Something bad happened; please try again later.');
+    // console.log(errorarr);
+    return throwError(error);
     return errorarr;
   }
 }
