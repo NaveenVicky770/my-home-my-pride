@@ -51,6 +51,10 @@ export class ApiService {
     return this.getGetData('/get_current_user_details');
   }
 
+  public getStates(countryCode) {
+    return this.getGetData('/state?country_id='+countryCode);
+  }
+
   private extractData(res: Response) {
     console.log('Response Block=====>', res);
     const body = res;

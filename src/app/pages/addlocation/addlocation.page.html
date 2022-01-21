@@ -75,13 +75,14 @@
             >State<span class="text-danger">*</span></ion-label
           >
           <ion-select
+            (click)="getDistricts($event)"
             [interfaceOptions]="customStatePopoverOptions"
             interface="popover"
             placeholder=" Select a State"
             class="border ion-margin-top"
           >
-            <ion-select-option *ngFor="let option of states" value="{{option}}"
-              >{{option}}</ion-select-option
+            <ion-select-option *ngFor="let option of states" value="{{option.state_id}}"
+              >{{option.state_name}}</ion-select-option
             >
           </ion-select>
         </ion-item>

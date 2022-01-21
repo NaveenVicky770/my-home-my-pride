@@ -31,7 +31,7 @@ export class AddlocationPage implements OnInit {
   };
 
   countries = ['India', 'China', 'USA'];
-  states = ['Andhra Pradesh', 'Tamil Nadu', 'Karntaka'];
+  states = [];
   districts = ['Chittor', 'Kadapa', 'Hyderabad'];
   existingHouseNames = ['House1', 'House2'];
 
@@ -40,6 +40,7 @@ export class AddlocationPage implements OnInit {
   mobileNo: any;
   email: any;
   countryName: any;
+  countryCode: any;
   newHouseName: any;
   village: any;
   area: any;
@@ -89,7 +90,19 @@ export class AddlocationPage implements OnInit {
       this.email=(this.currentUser.email);
       this.mobileNo=(this.currentUser.phone_no);
       this.countryName=(this.currentUser.country_name);
+      this.countryCode=(this.currentUser.country_id);
+
+      this.apiService.getStates(this.countryCode).subscribe((resObj2)=>{
+        console.log(resObj2.states);
+        resObj2.states.forEach(element => {
+          this.states.push(element);
+        });
+
+      });
     });
+
+
+
   }
 
   addLocation() {
@@ -128,5 +141,9 @@ export class AddlocationPage implements OnInit {
       });
 
     this.router.navigateByUrl('/payments');
+  }
+
+  getDistricts(event){
+    console.log(event.target.value);
   }
 }
