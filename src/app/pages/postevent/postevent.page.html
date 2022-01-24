@@ -22,6 +22,7 @@
               placeholder="  Enter Event"
               type="text"
               required
+              formControlName="eventName"
             ></ion-input>
           </ion-item>
 
@@ -34,6 +35,7 @@
               placeholder=" Event description here"
               type="text"
               required
+              formControlName="eventDescription"
             ></ion-input>
           </ion-item>
         </ion-col>
@@ -51,6 +53,7 @@
             <ion-datetime
               value="2019-10-01T15:43:40.394Z"
               display-timezone="utc"
+              formControlName="eventFromDate"
             ></ion-datetime>
           </ion-item>
         </ion-col>
@@ -60,6 +63,7 @@
             <ion-datetime
               value="2019-10-01T15:43:40.394Z"
               display-timezone="utc"
+              formControlName="eventToDate"
             ></ion-datetime>
           </ion-item>
         </ion-col>

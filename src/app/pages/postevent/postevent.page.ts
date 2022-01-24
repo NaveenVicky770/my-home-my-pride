@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-postevent',
@@ -12,9 +13,22 @@ export class PosteventPage implements OnInit {
     message: 'Select an Address'
    };
 
+  postEventForm: FormGroup;
+
   constructor() { }
 
   ngOnInit() {
+    this.postEventForm = new FormGroup({
+      eventName: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
+      eventDescription: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
+
+    });
   }
 
 }
