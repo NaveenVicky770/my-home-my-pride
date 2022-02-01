@@ -48,6 +48,10 @@ export class ApiService {
     return this.getPostData('/add_location', requestData);
   }
 
+  public getExistingHouses() {
+    return this.getGetData('/get_existing_houses');
+  }
+
   public addEvent(requestData) {
     return this.getPostData('/add_events', requestData);
   }

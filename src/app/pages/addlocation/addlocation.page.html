@@ -37,7 +37,6 @@
             >Add New House Name<span class="text-danger">*</span>
           </ion-label>
           <ion-input
-            [(ngModel)]="newHouseName"
             class="form-control ion-margin-top"
             placeholder="  House Name"
             type="text"
@@ -54,11 +53,12 @@
             interface="popover"
             placeholder=" Select a House Name"
             class="border ion-margin-top"
+            formControlName="existingHouseName"
           >
             <ion-select-option
-              *ngFor="let option of existingHouseNames"
-              value="{{option}}"
-              >{{option}}</ion-select-option
+              *ngFor="let option of existingHouses"
+              value="{{option.house_id}}"
+              >{{option.house_name}}</ion-select-option
             >
           </ion-select>
         </ion-item>
@@ -99,6 +99,7 @@
             interface="popover"
             placeholder="Select a District"
             class="border ion-margin-top"
+            formControlName="district"
           >
             <ion-select-option
               *ngFor="let option of districts"
@@ -113,7 +114,6 @@
             >Village/City/Town Name<span class="text-danger">*</span>
           </ion-label>
           <ion-input
-            [(ngModel)]="village"
             class="form-control ion-margin-top"
             placeholder="  Enter details"
             type="text"
@@ -126,7 +126,6 @@
             >Area<span class="text-danger">*</span></ion-label
           >
           <ion-input
-            [(ngModel)]="area"
             class="form-control ion-margin-top"
             placeholder="  Enter Area"
             type="text"
@@ -140,7 +139,6 @@
             >Door No/Plot No<span class="text-danger">*</span></ion-label
           >
           <ion-input
-            [(ngModel)]="doorPlotNo"
             class="form-control ion-margin-top"
             placeholder="  Enter Details"
             type="text"
@@ -152,7 +150,6 @@
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary">Apartment</ion-label>
           <ion-input
-            [(ngModel)]="apartment"
             class="form-control ion-margin-top"
             placeholder="  Apartment name & Flat no"
             type="text"

@@ -33,7 +33,7 @@ export class AddlocationPage implements OnInit {
   countries = ['India', 'China', 'USA'];
   states = [];
   districts = [];
-  existingHouseNames = ['House1', 'House2'];
+  existingHouses = [];
 
   locationData = {};
   userName: any;
@@ -42,10 +42,6 @@ export class AddlocationPage implements OnInit {
   countryName: any;
   countryCode: any;
   newHouseName: any;
-  village: any;
-  area: any;
-  doorPlotNo: any;
-  apartment: any;
 
   val = '';
 
@@ -61,12 +57,22 @@ export class AddlocationPage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required],
       }),
-
+      existingHouseName: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
+      state: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
+      district: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
       village: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required],
       }),
-
       area: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required],
@@ -82,56 +88,50 @@ export class AddlocationPage implements OnInit {
         validators: [Validators.required],
       }),
 
-      state: new FormControl(null, {
-        updateOn: 'change',
-        validators: [Validators.required],
-      }),
     });
 
     this.apiService.getCurrentUser().subscribe((resObj) => {
       this.currentUser = resObj.message;
       console.log(this.currentUser);
-      this.userName=(this.currentUser.name);
-      this.email=(this.currentUser.email);
-      this.mobileNo=(this.currentUser.phone_no);
-      this.countryName=(this.currentUser.country_name);
-      this.countryCode=(this.currentUser.country_id);
+      this.userName = this.currentUser.name;
+      this.email = this.currentUser.email;
+      this.mobileNo = this.currentUser.phone_no;
+      this.countryName = this.currentUser.country_name;
+      this.countryCode = this.currentUser.country_id;
 
-      this.apiService.getStates(this.countryCode).subscribe((resObj2)=>{
+      this.apiService.getStates(this.countryCode).subscribe((resObj2) => {
         console.log(resObj2.states);
-        resObj2.states.forEach(element => {
+        resObj2.states.forEach((element) => {
           this.states.push(element);
         });
-
       });
     });
 
-
+    this.apiService.getExistingHouses().subscribe((resObj)=>{
+      console.log('Existing Houses',resObj);
+      resObj.message.forEach(element => {
+        this.existingHouses.push({house_name:element.name,house_id:element.location_id});
+      });
+    });
 
   }
 
   addLocation() {
-    this.location = {
-      name: this.userName,
-      mobileNo: this.mobileNo,
-      houseName: this.newHouseName,
-    };
-    console.log(this.location);
-
+    console.log(this.userName);
     this.apiService
       .addLocation({
-        name: this.currentUser.userName,
-        phone_no: this.currentUser.mobile,
-        email: this.currentUser.email,
-        existing_house_name: 'existing One',
-        new_house_name: this.newHouseName,
-        country: this.currentUser.countryName,
-        state: 'AP',
-        district: 'GNT',
-        village_city_town: this.village,
-        area: this.area,
-        door_plot_no: this.doorPlotNo,
-        apartement: this.apartment,
+        name: this.userName,
+        phone_no: this.mobileNo,
+        email: this.email,
+        existing_house_id: this.addLocationForm.get('existingHouseName').value,
+        new_house_name: this.addLocationForm.get('newHouseName').value,
+        country: this.countryName,
+        state: this.addLocationForm.get('state').value,
+        district: this.addLocationForm.get('newHouseName').value,
+        village_city_town: this.addLocationForm.get('village').value,
+        area: this.addLocationForm.get('area').value,
+        door_plot_no: this.addLocationForm.get('doorPlotNo').value,
+        apartment: this.addLocationForm.get('apartment').value,
         location: 'Aqwe',
         voice_direction: 'asdas',
       })
@@ -148,14 +148,16 @@ export class AddlocationPage implements OnInit {
     this.router.navigateByUrl('/payments');
   }
 
-  getDistricts(event){
-    this.districts=[];
-    const stateId=(event.target.value);
-    this.apiService.getDistricts(this.countryCode,stateId).subscribe((resObj)=>{
-      console.log(resObj.district);
-      resObj.district.forEach(element => {
-        this.districts.push(element.district_name);
+  getDistricts(event) {
+    this.districts = [];
+    const stateId = event.target.value;
+    this.apiService
+      .getDistricts(this.countryCode, stateId)
+      .subscribe((resObj) => {
+        console.log(resObj.district);
+        resObj.district.forEach((element) => {
+          this.districts.push(element.district_name);
+        });
       });
-    });
   }
 }
