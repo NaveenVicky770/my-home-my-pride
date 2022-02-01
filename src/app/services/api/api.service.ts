@@ -48,6 +48,14 @@ export class ApiService {
     return this.getPostData('/add_location', requestData);
   }
 
+  public addEvent(requestData) {
+    return this.getPostData('/add_events', requestData);
+  }
+
+  public getLocationsData() {
+    return this.getGetData('/get_all_location_visibility');
+  }
+
   public getCurrentUser() {
     return this.getGetData('/get_current_user_details');
   }

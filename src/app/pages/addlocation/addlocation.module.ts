@@ -17,7 +17,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     IonicModule,
     AddlocationPageRoutingModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [AddlocationPage],
 })
