@@ -87,7 +87,6 @@ export class AddlocationPage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required],
       }),
-
     });
 
     this.apiService.getCurrentUser().subscribe((resObj) => {
@@ -107,31 +106,35 @@ export class AddlocationPage implements OnInit {
       });
     });
 
-    this.apiService.getExistingHouses().subscribe((resObj)=>{
-      console.log('Existing Houses',resObj);
-      resObj.message.forEach(element => {
-        this.existingHouses.push({house_name:element.name,house_id:element.location_id});
+    this.apiService.getExistingHouses().subscribe((resObj) => {
+      console.log('Existing Houses', resObj);
+      resObj.message.forEach((element) => {
+        this.existingHouses.push({
+          house_name: element.name,
+          house_id: element.location_id,
+        });
       });
     });
-
   }
 
   addLocation() {
-    console.log(this.userName);
+    const existing_House = this.addLocationForm.get('existingHouseName').value
+      ? this.addLocationForm.get('existingHouseName').value
+      : 0;
     this.apiService
       .addLocation({
         name: this.userName,
-        phone_no: this.mobileNo,
+        phone_no: 8096915812, //need change FROM API itself
         email: this.email,
-        existing_house_id: this.addLocationForm.get('existingHouseName').value,
+        existing_house_id: existing_House,
         new_house_name: this.addLocationForm.get('newHouseName').value,
         country: this.countryName,
         state: this.addLocationForm.get('state').value,
-        district: this.addLocationForm.get('newHouseName').value,
+        district: this.addLocationForm.get('district').value,
         village_city_town: this.addLocationForm.get('village').value,
         area: this.addLocationForm.get('area').value,
         door_plot_no: this.addLocationForm.get('doorPlotNo').value,
-        apartment: this.addLocationForm.get('apartment').value,
+        apartement: this.addLocationForm.get('apartment').value,
         location: 'Aqwe',
         voice_direction: 'asdas',
       })

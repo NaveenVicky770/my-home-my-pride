@@ -124,8 +124,11 @@ export class SigninPage implements OnInit {
     this.currentFragment = 'otp';
   }
 
+
   verifyOtpAndGetToken(phone_no, d_1, d_2, d_3, d_4) {
-    const reqData = {phone_no: 9493443637,digit_1: '1',digit_2: '1',digit_3: '1',digit_4: '1'};
+    const ph_no =(this.phoneNumber.value.nationalNumber).replace(/\s/g,'');
+
+    const reqData = {phone_no: ph_no,digit_1: '1',digit_2: '1',digit_3: '1',digit_4: '1'};
 
     console.log(typeof reqData);
 
