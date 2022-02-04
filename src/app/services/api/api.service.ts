@@ -26,6 +26,12 @@ export class ApiService {
       .pipe(map(this.extractData), catchError(this.handleError));
   }
 
+  getPutData(methodName, requestData) {
+    return this.http
+      .put(this.apiUrl + methodName, requestData)
+      .pipe(map(this.extractData), catchError(this.handleError));
+  }
+
   getGetData(methodName) {
     return this.http
       .get(this.apiUrl + methodName)
@@ -56,8 +62,12 @@ export class ApiService {
     return this.getPostData('/add_events', requestData);
   }
 
-  public getLocationsData() {
-    return this.getGetData('/get_all_location_visibility');
+  public getLocationData(locationId) {
+    return this.getGetData('/get_all_location_visibility?location_id='+locationId);
+  }
+
+  public updateLocationVisibility(updateData) {
+    return this.getPutData('/update_location_visibility',updateData);
   }
 
   public getCurrentUser() {

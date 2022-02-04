@@ -29,6 +29,7 @@ export class EditlocationPage implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.apiService.getCurrentUser();
+    const locationId = localStorage.getItem('locationIdForEdit');
   }
 
 }

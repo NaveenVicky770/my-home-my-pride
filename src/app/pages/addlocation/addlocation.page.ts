@@ -124,7 +124,7 @@ export class AddlocationPage implements OnInit {
     this.apiService
       .addLocation({
         name: this.userName,
-        phone_no: 8096915812, //need change FROM API itself
+        phone_no: this.mobileNo, //need change FROM API itself
         email: this.email,
         existing_house_id: existing_House,
         new_house_name: this.addLocationForm.get('newHouseName').value,

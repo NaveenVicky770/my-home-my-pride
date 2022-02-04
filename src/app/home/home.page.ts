@@ -101,6 +101,11 @@ export class HomePage implements OnInit {
     }
   }
 
+  showLocationAndEvents(userId){
+    console.log(userId);
+    
+  }
+
   ionViewWillEnter() {
     this.isSignIn = window.localStorage.getItem('isLoggedIn');
     console.log(this.isSignIn);

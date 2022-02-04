@@ -42,7 +42,7 @@
 
       <ion-col>
 
-        <ion-item *ngFor="let data of userRecords" routerLink="/showlocation">
+        <ion-item *ngFor="let data of userRecords" (click)="showLocationAndEvents(data.user_id)">
 
           <ion-col size="4">
             <!-- <ion-thumbnail>

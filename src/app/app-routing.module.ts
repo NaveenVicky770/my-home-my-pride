@@ -58,6 +58,10 @@ const routes: Routes = [
   {
     path: 'multilocations-payment',
     loadChildren: () => import('./pages/multilocations-payment/multilocations-payment.module').then( m => m.MultilocationsPaymentPageModule)
+  },
+  {
+    path: 'selectlocation',
+    loadChildren: () => import('./pages/selectlocation/selectlocation.module').then( m => m.SelectlocationPageModule)
   }
 
 ];

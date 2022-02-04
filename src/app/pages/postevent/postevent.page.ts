@@ -47,9 +47,9 @@ export class PosteventPage implements OnInit {
       }),
     });
 
-    this.apiService.getLocationsData().subscribe((resObj)=>{
+    this.apiService.getExistingHouses().subscribe((resObj)=>{
       console.log(resObj);
-      resObj.visibility_locations.forEach(element => {
+      resObj.message.forEach(element => {
         console.log(element.name);
         this.locations.push({location_name:element.name, location_id: element.location_id});
       });
