@@ -18,39 +18,47 @@
           [interfaceOptions]="customPopoverOptions"
           interface="popover"
           placeholder="Select House Name"
+          (ionChange)="getLocationData($event)"
         >
-          <ion-select-option *ngFor="let option of locations" value="{{option}}"
-            >{{option}}</ion-select-option
+          <ion-select-option
+            *ngFor="let option of locations"
+            value="{{option.houseId}}"
+            >{{option.houseName}}</ion-select-option
           >
         </ion-select>
 
-        <ion-item class="shadow ion-margin">
-          <ion-label position="stacked">Your message</ion-label>
-          <ion-textarea
-            rows="3"
-            cols="20"
-            placeholder="Enter message.."
-          ></ion-textarea>
-        </ion-item>
+        <form [formGroup]="shareLocationForm">
+          <ion-item class="shadow ion-margin">
+            <ion-label position="stacked">Your message</ion-label>
+            <ion-textarea
+              rows="3"
+              cols="20"
+              placeholder="Enter message.."
+              formControlName="shareMessage"
+            ></ion-textarea>
+          </ion-item>
+        </form>
 
-        <ion-label position="stacked">Select contacts to share</ion-label>
-          <ion-select
-            class="shadow ion-margin"
-            [interfaceOptions]="customContactPopoverOptions"
-            interface="popover"
-            placeholder="Select Contacts to share"
+        <div class="text-center">
+          <ion-button (click)="share()" color="primary">Share Now</ion-button>
+        </div>
+
+        <!-- <ion-label position="stacked">Select contacts to share</ion-label>
+        <ion-select
+          class="shadow ion-margin"
+          [interfaceOptions]="customContactPopoverOptions"
+          interface="popover"
+          placeholder="Select Contacts to share"
+        >
+          <ion-select-option *ngFor="let option of contacts" value="{{option}}"
+            >{{option}}</ion-select-option
           >
-            <ion-select-option
-              *ngFor="let option of contacts"
-              value="{{option}}"
-              >{{option}}</ion-select-option
-            >
-          </ion-select>
+        </ion-select> -->
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <div class="text-center">
-    <ion-button color="primary">Submit</ion-button>
-  </div>
+  <!-- <div class="text-center">
+    <ion-button (click)="share()" color="primary">Submit</ion-button>
+  </div> -->
 </ion-content>
