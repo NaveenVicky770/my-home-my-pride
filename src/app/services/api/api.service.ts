@@ -12,8 +12,8 @@ import { catchError, map } from 'rxjs/operators';
 export class ApiService {
   users = [];
   // apiUrl = 'https://presentience-clients.in/myhome_mypride/restapi';
-  // apiUrl = 'http://localhost:30/myhome_mypride/restapi';
-  apiUrl = 'https://taskmanager.website/myhome_mypride/restapi';
+  apiUrl = 'http://localhost:30/myhome_mypride/restapi';
+  // apiUrl = 'https://taskmanager.website/myhome_mypride/restapi';
 
   constructor(private http: HttpClient) {}
   sendMail(mail) {
@@ -93,6 +93,10 @@ export class ApiService {
 
   public searchHouses(searchText) {
     return this.getGetData('/search_houses?name='+searchText);
+  }
+
+  public sendMailToSupport(message) {
+    return this.getPostData('/support', {message});
   }
 
   private extractData(res: Response) {

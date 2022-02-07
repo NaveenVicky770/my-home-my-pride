@@ -9,6 +9,9 @@ import { ApiService } from 'src/app/services/api/api.service';
   styleUrls: ['./support.page.scss'],
 })
 export class SupportPage implements OnInit {
+
+  message;
+
   constructor(
     private apiService: ApiService
   ) { }
@@ -18,7 +21,10 @@ export class SupportPage implements OnInit {
 
   sendMailToSupport(mailAdress){
     //code to mail
-    this.apiService.sendMail(mailAdress);
+    console.log(this.message);
+    this.apiService.sendMailToSupport(this.message).subscribe((resObj)=>{
+      console.log(resObj);
+    });
   }
 
 }
