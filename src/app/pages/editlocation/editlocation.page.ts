@@ -38,6 +38,8 @@ export class EditlocationPage implements OnInit {
   };
   locationData;
 
+  locationId = localStorage.getItem('locationIdForEdit');
+
   constructor(
     private apiService: ApiService,
     private commonService: CommonService
@@ -82,9 +84,7 @@ export class EditlocationPage implements OnInit {
       }),
     });
 
-
-    const locationId = localStorage.getItem('locationIdForEdit');
-    this.apiService.getLocationData(locationId).subscribe((resObj)=>{
+    this.apiService.getLocationData(this.locationId).subscribe((resObj)=>{
       this.locationData = (resObj.visibility_locations);
       console.log('\nlocation data-------------->',this.locationData);
       this.editLocationForm.patchValue({...this.locationData});
@@ -137,21 +137,22 @@ export class EditlocationPage implements OnInit {
       ? this.editLocationForm.get('existing_house_id').value
       : 0;
     this.apiService
-      .updateLocationVisibility({
-        name: this.userName,
-        phone_no: this.mobileNo, //need change FROM API itself
-        email: this.email,
-        existing_house_id: existing_House,
+      .editLocation({
+        location_id:this.locationId,
+        // name: this.userName,
+        // phone_no: this.mobileNo,
+        // email: this.email,
+        // existing_house_id: existing_House,
         new_house_name: this.editLocationForm.get('new_house_name').value,
-        country: this.countryName,
-        state: this.editLocationForm.get('state').value,
-        district: this.editLocationForm.get('district').value,
-        village_city_town: this.editLocationForm.get('village_city_town').value,
-        area: this.editLocationForm.get('area').value,
-        door_plot_no: this.editLocationForm.get('door_plot_no').value,
-        apartement: this.editLocationForm.get('apartement').value,
-        location: 'Aqwe',
-        voice_direction: 'asdas',
+        // country: this.countryName,
+        // state: this.editLocationForm.get('state').value,
+        // district: this.editLocationForm.get('district').value,
+        // village_city_town: this.editLocationForm.get('village_city_town').value,
+        // area: this.editLocationForm.get('area').value,
+        // door_plot_no: this.editLocationForm.get('door_plot_no').value,
+        // apartement: this.editLocationForm.get('apartement').value,
+        // location: 'Aqwe',
+        // voice_direction: 'asdas',
       })
       .subscribe((resObj) => {
         console.log(resObj);

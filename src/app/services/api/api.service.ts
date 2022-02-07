@@ -54,6 +54,10 @@ export class ApiService {
     return this.getPostData('/add_location', requestData);
   }
 
+  public editLocation(updateData) {
+    return this.getPutData('/edit_location',updateData);
+  }
+
   public getExistingHouses() {
     return this.getGetData('/get_existing_houses');
   }
