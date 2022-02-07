@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api/api.service';
 import { CommonService } from '../services/common/common.service';
 
@@ -77,7 +78,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -103,7 +105,10 @@ export class HomePage implements OnInit {
 
   showLocationAndEvents(userId){
     console.log(userId);
-    
+    const selectedLocationId = userId;
+    localStorage.setItem('showLocationUserId',selectedLocationId);
+    this.router.navigateByUrl('/showlocation');
+
   }
 
   ionViewWillEnter() {

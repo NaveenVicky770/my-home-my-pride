@@ -12,7 +12,8 @@ import { catchError, map } from 'rxjs/operators';
 export class ApiService {
   users = [];
   // apiUrl = 'https://presentience-clients.in/myhome_mypride/restapi';
-  apiUrl = 'http://localhost:30/myhome_mypride/restapi';
+  // apiUrl = 'http://localhost:30/myhome_mypride/restapi';
+  apiUrl = 'https://taskmanager.website/myhome_mypride/restapi';
 
   constructor(private http: HttpClient) {}
   sendMail(mail) {
@@ -48,6 +49,10 @@ export class ApiService {
 
   public userLogin(requestData) {
     return this.getPostData('/login', requestData);
+  }
+
+  public getAllLocationsAndEvents() {
+    return this.getGetData('/get_user_locations_and_events');
   }
 
   public addLocation(requestData) {

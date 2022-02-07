@@ -3,10 +3,13 @@
 <ion-content>
   <app-header-text-logo></app-header-text-logo>
 
-  <ion-card class="ion-margin ion-padding-bottom">
+  <ion-card
+    *ngFor="let location of allLocationsData"
+    class="ion-margin ion-padding-bottom"
+  >
     <ion-card-header class="pb-0">
       <ion-card-title color="primary" class="ion-margin-bottom login-card"
-        >Location Address</ion-card-title
+        >{{location.Locations.new_house_name}}</ion-card-title
       >
     </ion-card-header>
 
@@ -14,16 +17,24 @@
       <ion-item lines="none">
         <ion-grid>
           <ion-row>
-            <ion-col size="5" class="shadow">
+            <ion-col size="6" class="shadow">
               <p class="m-3">
-                Address:<br />
-                line1,<br />
-                line2,<br />
+                <ion-text color="primary">
+                  <h2>Address</h2>
+                </ion-text>
+                Door.No: {{location.Locations.door_plot_no}},<br />
+                {{location.Locations.apartement}},<br />
+                {{location.Locations.village_city_town}},<br />
+                {{location.Locations.district}},<br />
+                {{location.Locations.state}},<br />
+                {{location.Locations.country}},<br />
               </p>
             </ion-col>
-            <ion-col size="7" class="shadow">
+            <ion-col size="6" class="shadow">
               <div class="m-3">
-                <ion-label>Identification Image</ion-label>
+                <ion-text color="primary">
+                  <h5>Identification Image</h5>
+                </ion-text>
                 <div class="Rectangle-74">
                   <ion-text>Image Here</ion-text>
                 </div>
@@ -48,57 +59,78 @@
       <ion-img src="assets/images/map.png" class="image-6 ion-margin"></ion-img>
 
       <div class="text-center">
-        <ion-button color="primary"> Click here for directions </ion-button>
+        <ion-button color="primary"> Click here for directions </ion-button><br>
+        <ion-text *ngIf="location.Events.length===0" color="danger">
+          <h4>Currently no events in this location</h4>
+        </ion-text>
       </div>
+
     </ion-list>
 
-    <ion-card-header class="pb-0">
-      <ion-card-title color="primary" class="ion-margin-bottom login-card"
-        >Event Address</ion-card-title
-      >
-    </ion-card-header>
+    <ng-container *ngFor="let event of location.Events">
+      <ion-card-header class="pb-0">
+        <ion-card-title color="primary" class="ion-margin-bottom login-card"
+          >{{event.event_name}}</ion-card-title
+        >
+      </ion-card-header>
 
-    <ion-list class="pt-0">
-      <ion-item lines="none">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6" class="shadow">
-              <p class="m-3">
-                Address:<br />
-                line1,<br />
-                line2,<br />
-              </p>
-            </ion-col>
-            <ion-col size="6" class="shadow">
-              <div class="m-1">
-                <ion-label color="primary">Event Description</ion-label>
-                <ion-text class="desc">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting
-                </ion-text>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
+      <ion-list class="pt-0" color="danger">
+        <ion-item lines="none">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="shadow">
+                <p class="m-3">
+                  Address:<br />
+                  {{event.event_address}}
+                </p>
+              </ion-col>
+              <ion-col size="6" class="shadow">
+                <div class="m-1">
+                  <ion-label color="primary">Event Description</ion-label>
+                  <ion-text class="desc">
+                    {{event.event_description}}
+                  </ion-text>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6" class="shadow">
+                <p class="m-3">
+                  From:<br />
+                  {{event.from_date}}
+                </p>
+              </ion-col>
+              <ion-col size="6" class="shadow">
+                <p class="m-3">
+                  To:<br />
+                  {{event.to_date}}
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
 
-      <ion-item lines="none" class="ion-margin text-center">
-        <span class="Rectangle-73">
-          <ion-text>Image</ion-text>
-        </span>
-        <span class="Rectangle-73">
-          <ion-text>Image</ion-text>
-        </span>
-        <span class="Rectangle-73">
-          <ion-text>Image</ion-text>
-        </span>
-      </ion-item>
+        <ion-item lines="none" class="ion-margin text-center">
+          <span class="Rectangle-73">
+            <ion-text>Image</ion-text>
+          </span>
+          <span class="Rectangle-73">
+            <ion-text>Image</ion-text>
+          </span>
+          <span class="Rectangle-73">
+            <ion-text>Image</ion-text>
+          </span>
+        </ion-item>
 
-      <ion-img src="assets/images/map.png" class="image-6 ion-margin"></ion-img>
+        <ion-img
+          src="assets/images/map.png"
+          class="image-6 ion-margin"
+        ></ion-img>
 
-      <div class="text-center">
-        <ion-button color="primary"> Click here for directions </ion-button>
-      </div>
-    </ion-list>
+        <div class="text-center">
+          <ion-button color="primary"> Click here for directions </ion-button>
+        </div>
+      </ion-list>
+    </ng-container>
   </ion-card>
 </ion-content>
