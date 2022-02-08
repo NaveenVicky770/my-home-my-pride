@@ -12,8 +12,8 @@ import { catchError, map } from 'rxjs/operators';
 export class ApiService {
   users = [];
   // apiUrl = 'https://presentience-clients.in/myhome_mypride/restapi';
-  apiUrl = 'http://localhost:30/myhome_mypride/restapi';
-  // apiUrl = 'https://taskmanager.website/myhome_mypride/restapi';
+  // apiUrl = 'http://localhost:30/myhome_mypride/restapi';
+  apiUrl = 'https://taskmanager.website/myhome_mypride/restapi';
 
   constructor(private http: HttpClient) {}
   sendMail(mail) {
