@@ -51,7 +51,7 @@ export class PosteventPage implements OnInit {
       console.log(resObj);
       resObj.message.forEach(element => {
         console.log(element.name);
-        this.locations.push({location_name:element.name, location_id: element.location_id});
+        this.locations.push({location_name:element.new_house_name, location_id: element.location_id});
       });
     });
   }

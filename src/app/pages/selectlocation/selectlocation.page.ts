@@ -22,7 +22,7 @@ export class SelectlocationPage implements OnInit {
       console.log('Existing Houses', resObj);
       resObj.message.forEach((element) => {
         this.locations.push({
-          houseName: element.name,
+          houseName: element.new_house_name,
           houseId: element.location_id,
         });
       });

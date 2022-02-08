@@ -110,7 +110,7 @@ export class AddlocationPage implements OnInit {
       console.log('Existing Houses', resObj);
       resObj.message.forEach((element) => {
         this.existingHouses.push({
-          house_name: element.name,
+          house_name: element.new_house_name,
           house_id: element.location_id,
         });
       });

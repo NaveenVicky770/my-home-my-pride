@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { CommonService } from 'src/app/services/common/common.service';
 
@@ -42,7 +43,8 @@ export class EditlocationPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -111,7 +113,7 @@ export class EditlocationPage implements OnInit {
       console.log('Existing Houses', resObj);
       resObj.message.forEach((element) => {
         this.existingHouses.push({
-          houseName: element.name,
+          houseName: element.new_house_name,
           houseId: element.location_id,
         });
       });
@@ -139,20 +141,20 @@ export class EditlocationPage implements OnInit {
     this.apiService
       .editLocation({
         location_id:this.locationId,
-        // name: this.userName,
-        // phone_no: this.mobileNo,
-        // email: this.email,
-        // existing_house_id: existing_House,
+        name: this.userName,
+        phone_no: this.mobileNo,
+        email: this.email,
+        existing_house_id: existing_House,
         new_house_name: this.editLocationForm.get('new_house_name').value,
-        // country: this.countryName,
-        // state: this.editLocationForm.get('state').value,
-        // district: this.editLocationForm.get('district').value,
-        // village_city_town: this.editLocationForm.get('village_city_town').value,
-        // area: this.editLocationForm.get('area').value,
-        // door_plot_no: this.editLocationForm.get('door_plot_no').value,
-        // apartement: this.editLocationForm.get('apartement').value,
-        // location: 'Aqwe',
-        // voice_direction: 'asdas',
+        country: this.countryName,
+        state: this.editLocationForm.get('state').value,
+        district: this.editLocationForm.get('district').value,
+        village_city_town: this.editLocationForm.get('village_city_town').value,
+        area: this.editLocationForm.get('area').value,
+        door_plot_no: this.editLocationForm.get('door_plot_no').value,
+        apartement: this.editLocationForm.get('apartement').value,
+        location: 'Aqwe',
+        voice_direction: 'asdas',
       })
       .subscribe((resObj) => {
         console.log(resObj);
@@ -162,6 +164,7 @@ export class EditlocationPage implements OnInit {
           2000,
           'bottom'
         );
+        this.router.navigateByUrl('/home');
       });
   }
 

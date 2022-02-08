@@ -24,7 +24,7 @@ export class VisibilityPage implements OnInit {
       console.log('Existing Houses', resObj);
       resObj.message.forEach((element) => {
         this.locations.push({
-          houseName: element.name,
+          houseName: element.new_house_name,
           houseId: element.location_id,
         });
       });
@@ -47,10 +47,13 @@ export class VisibilityPage implements OnInit {
 
   toggleVisibility(event) {
     console.log(event.target.checked);
-    const updatedStatus = event.target.checked;
+    const updatedStatus = !(event.target.checked);
+    console.log('Updated Status',updatedStatus);
+    const status = updatedStatus === true? '1': '0';
+    console.log('Status',status);
 
     this.apiService
-      .updateLocationVisibility({ location_id: 24, is_active: 1 })
+      .updateLocationVisibility({ location_id: this.selectedLocationId, is_active: status })
       .subscribe((resObj) => {
         console.log(resObj);
       });
