@@ -44,6 +44,7 @@ export class AddlocationPage implements OnInit {
   newHouseName: any;
 
   val = '';
+  orderId;
 
   constructor(
     private apiService: ApiService,
@@ -104,6 +105,16 @@ export class AddlocationPage implements OnInit {
           this.states.push(element);
         });
       });
+    });
+
+    this.apiService.createAndGetOrderData({
+      amount: 100,
+      currency: 'INR',
+      receipt: 'rcptid_11',
+    }).subscribe((resObj)=>{
+      console.log('\n\nORDER ID',resObj.id);
+      this.orderId= resObj.id;
+      localStorage.setItem('order_id', this.orderId);
     });
 
     this.apiService.getExistingHouses().subscribe((resObj) => {

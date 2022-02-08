@@ -60,7 +60,7 @@ export class ApiService {
   }
 
   public editLocation(updateData) {
-    return this.getPutData('/edit_location',updateData);
+    return this.getPutData('/edit_location', updateData);
   }
 
   public getExistingHouses() {
@@ -72,11 +72,13 @@ export class ApiService {
   }
 
   public getLocationData(locationId) {
-    return this.getGetData('/get_all_location_visibility?location_id='+locationId);
+    return this.getGetData(
+      '/get_all_location_visibility?location_id=' + locationId
+    );
   }
 
   public updateLocationVisibility(updateData) {
-    return this.getPutData('/update_location_visibility',updateData);
+    return this.getPutData('/update_location_visibility', updateData);
   }
 
   public getCurrentUser() {
@@ -84,19 +86,39 @@ export class ApiService {
   }
 
   public getStates(countryCode) {
-    return this.getGetData('/state?country_id='+countryCode);
+    return this.getGetData('/state?country_id=' + countryCode);
   }
 
-  public getDistricts(countryId,stateId) {
-    return this.getGetData('/district?country_id='+countryId+'&state_id='+stateId);
+  public getDistricts(countryId, stateId) {
+    return this.getGetData(
+      '/district?country_id=' + countryId + '&state_id=' + stateId
+    );
   }
 
   public searchHouses(searchText) {
-    return this.getGetData('/search_houses?name='+searchText);
+    return this.getGetData('/search_houses?name=' + searchText);
   }
 
   public sendMailToSupport(message) {
-    return this.getPostData('/support', {message});
+    return this.getPostData('/support', { message });
+  }
+
+  public createAndGetOrderData(requestData) {
+    var clientId = 'rzp_live_eBda20ZBUAYf1d';
+    var clientSecret = 'NNlHy4qGY9viWkkbUtqlb0b4';
+
+    var authorizationBasic = window.btoa(clientId + ':' + clientSecret);
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Basic '+authorizationBasic,
+      }
+    };
+    console.log(options);
+    return this.http
+      .post('https://api.razorpay.com/v1/orders',JSON.stringify(requestData), options)
+      .pipe(map(this.extractData), catchError(this.handleError));
   }
 
   private extractData(res: Response) {

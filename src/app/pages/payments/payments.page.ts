@@ -15,12 +15,15 @@ export class PaymentsPage {
   constructor(private alertController: AlertController) {}
 
   async payWithRazorpay() {
+
+    const orderId = localStorage.getItem('order_id');
+
     const options = {
-      key: 'rzp_live_twMETB1R0HcCdt',
+      key: 'rzp_live_eBda20ZBUAYf1d',
       amount: '100',
       description: 'Great offers',
       image: 'https://i.imgur.com/3g7nmJC.png',
-      order_id: 'order_IMhO5CdpwaKBFs', //Order ID generated in Step 1
+      order_id: orderId, //Order ID generated in Step 1
       currency: 'INR',
       name: 'My Home My Pride',
       prefill: {
@@ -45,7 +48,7 @@ export class PaymentsPage {
     // let responseObj = JSON.parse(response)
     console.log('message' + response['razorpay_payment_id']);
     const alert = await this.alertController.create({
-      message: 'Payment Successful' + response['razorpay_payment_id'],
+      message: 'Payment Successful   ' + response['razorpay_payment_id'],
       backdropDismiss: true,
     });
 

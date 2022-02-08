@@ -25,7 +25,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
 
     //Authentication by setting header with token value
-    if (token) {
+    console.log('====================>>>>>>>>>>>>>>>',request.urlWithParams, request.headers.has('Authorization'));
+    if (token && request.headers.has('Authorization')!==true) {
+
       request = request.clone({
         setHeaders: {
           // eslint-disable-next-line @typescript-eslint/naming-convention
