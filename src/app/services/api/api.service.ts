@@ -126,7 +126,7 @@ export class ApiService {
   }
 
   private extractData(res: Response) {
-    console.log('Response Block=====>', res);
+    // console.log('Response Block=====>', res);
     const body = res;
     return body || {};
   }

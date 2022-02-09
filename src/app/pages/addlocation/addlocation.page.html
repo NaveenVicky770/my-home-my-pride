@@ -214,17 +214,20 @@
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary"
-            >Upload Voice Direction<span class="text-danger">*</span>
+            >Record Voice Direction<span class="text-danger">*</span>
           </ion-label>
 
-          <ion-icon name="mic-outline" slot="end"></ion-icon>
-          <ion-input
-            class="ion-margin-top form-control-file"
-            type="file"
-            required
-            icon="mic-outline"
-          >
-          </ion-input>
+          <div class="my-2">
+            <ion-icon name="mic-outline" slot="end"></ion-icon>
+            <ion-button (click)="startRecording()" color="primary" slot="end">Start</ion-button>
+            <ion-button (click)="stopRecording()" color="danger" slot="end">Stop</ion-button>
+          </div>
+
+          <ion-list>
+            <ion-item button *ngFor="let f of storedFileNames" lines="none" (click)="playFile(f)">
+              {{f}}
+            </ion-item>
+          </ion-list>
         </ion-item>
       </ion-list>
     </form>

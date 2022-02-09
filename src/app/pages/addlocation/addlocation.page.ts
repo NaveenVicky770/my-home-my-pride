@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { GestureController, ModalController } from '@ionic/angular';
 import { MapModalComponent } from 'src/app/components/map-modal/map-modal.component';
 import { ApiService } from 'src/app/services/api/api.service';
 import { CommonService } from 'src/app/services/common/common.service';
+
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { RecordingData, VoiceRecorder } from 'capacitor-voice-recorder';
 
 @Component({
   selector: 'app-addlocation',
   templateUrl: './addlocation.page.html',
   styleUrls: ['./addlocation.page.scss'],
 })
-export class AddlocationPage implements OnInit {
+export class AddlocationPage implements OnInit, AfterViewInit {
   location: any;
   addLocationForm: FormGroup;
   currentUser;
@@ -46,10 +49,14 @@ export class AddlocationPage implements OnInit {
   val = '';
   orderId;
 
+  recording = false;
+  storedFileNames = [];
+
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private gestureCtrl: GestureController
   ) {}
 
   ngOnInit() {
@@ -92,7 +99,7 @@ export class AddlocationPage implements OnInit {
 
     this.apiService.getCurrentUser().subscribe((resObj) => {
       this.currentUser = resObj.message;
-      console.log(this.currentUser);
+      // console.log(this.currentUser);
       this.userName = this.currentUser.name;
       this.email = this.currentUser.email;
       this.mobileNo = this.currentUser.phone_no;
@@ -126,6 +133,20 @@ export class AddlocationPage implements OnInit {
         });
       });
     });
+
+
+    this.loadFiles();
+
+    VoiceRecorder.requestAudioRecordingPermission();
+
+  }
+
+  ngAfterViewInit() {
+    // const longPress = this.gestureCtrl.create({
+
+    // })
+
+    // longPress.enable();
   }
 
   addLocation() {
@@ -174,4 +195,57 @@ export class AddlocationPage implements OnInit {
         });
       });
   }
+
+  async loadFiles(){
+    Filesystem.readdir({
+      path:'',
+      directory: Directory.Data
+    }).then( result =>{
+      console.log('FileSYSTEM=====**************>>>>>>>',result);
+      this.storedFileNames = result.files;
+    });
+  }
+
+  startRecording(){
+    if(this.recording){
+      return;
+    }
+    this.recording = true;
+    VoiceRecorder.startRecording();
+
+  }
+
+  stopRecording(){
+    if(!this.recording){
+      return;
+    }
+    VoiceRecorder.stopRecording().then(async (result: RecordingData) => {
+      if(result.value && result.value.recordDataBase64){
+        const recordData = result.value.recordDataBase64;
+        console.log('RECORD DATA ***********************', recordData);
+
+        const fileName = new Date().getTime() +'.wav';
+        await Filesystem.writeFile({
+          path: fileName,
+          directory: Directory.Data,
+          data: recordData
+        });
+        this.loadFiles();
+      }
+    });
+  }
+
+  async playFile(fileName){
+    const audioFile = await Filesystem.readFile({
+      path: fileName,
+      directory: Directory.Data
+    });
+    console.log('AUDIO FILE #########', audioFile);
+    const base64Sound = audioFile.data;
+
+    const audioRef = new Audio(`data:audio/aac;base64,${base64Sound}`);
+    audioRef.oncanplaythrough = ()=> audioRef.play();
+    audioRef.load();
+  }
+
 }
