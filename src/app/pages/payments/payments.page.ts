@@ -2,6 +2,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 import { Checkout } from 'capacitor-razorpay';
@@ -15,7 +16,8 @@ import { ApiService } from 'src/app/services/api/api.service';
 export class PaymentsPage {
   constructor(
     private alertController: AlertController,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) {}
 
   async payWithRazorpay() {
@@ -56,12 +58,16 @@ export class PaymentsPage {
     });
 
     const orderData = {
-      order_id: response['razorpay_payment_id'],
+      payment_id: response['razorpay_payment_id'],
+      order_id: response['razorpay_order_id'],
       status: 1,
     };
 
+    console.log(orderData);
+
     this.apiService.updatePaymentStatus(orderData).subscribe((resObj)=>{
       console.log(resObj);
+      this.router.navigateByUrl('/home');
     });
 
     await alert.present();
