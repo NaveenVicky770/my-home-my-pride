@@ -125,9 +125,10 @@ export class ApiService {
     return this.getPostData('/payment_gateway_status', reqData);
   }
 
-  public getPincodeCoordinates() {
+  public getPincodeCoordinates(pinCode) {
+    pinCode = pinCode === ''? '517124':pinCode;
     const pincodeUrl =
-      'https://maps.googleapis.com/maps/api/geocode/json?address=517124&key=AIzaSyCukoUWZ00j9dGUUrkaOxj0oAxAlxbFNkM';
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${pinCode}&key=AIzaSyCukoUWZ00j9dGUUrkaOxj0oAxAlxbFNkM`;
     return this.http.get<any>(pincodeUrl).pipe(
       map((geoData) => {
         if (!geoData || !geoData.results || geoData.results.length === 0) {

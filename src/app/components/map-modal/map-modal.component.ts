@@ -19,6 +19,7 @@ export class MapModalComponent implements OnInit, AfterViewInit {
   @ViewChild('map') mapElementRef: ElementRef;
   latitude;
   longitude;
+  pinCode='';
 
   constructor(
     private modalCtrl: ModalController,
@@ -26,10 +27,13 @@ export class MapModalComponent implements OnInit, AfterViewInit {
     private apiService: ApiService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.pinCode = localStorage.getItem('pincode');
+    console.log(this.pinCode);
+  }
 
   ngAfterViewInit() {
-    this.apiService.getPincodeCoordinates().subscribe((resObj) => {
+    this.apiService.getPincodeCoordinates(this.pinCode).subscribe((resObj) => {
 
       this.latitude = resObj.results[0].geometry.location.lat;
       this.longitude = resObj.results[0].geometry.location.lng;

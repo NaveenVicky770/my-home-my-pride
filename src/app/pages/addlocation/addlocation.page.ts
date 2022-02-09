@@ -177,6 +177,10 @@ export class AddlocationPage implements OnInit, AfterViewInit {
     longPress.enable();
   }
 
+  onChange(event){
+    localStorage.setItem('pincode',(event.target.value));
+  }
+
   addLocation() {
     const existing_House = this.addLocationForm.get('existingHouseName').value
       ? this.addLocationForm.get('existingHouseName').value
