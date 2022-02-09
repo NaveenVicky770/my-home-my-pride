@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ApiService } from 'src/app/services/api/api.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,39 +17,48 @@ import { environment } from 'src/environments/environment';
 })
 export class MapModalComponent implements OnInit, AfterViewInit {
   @ViewChild('map') mapElementRef: ElementRef;
+  latitude;
+  longitude;
 
   constructor(
     private modalCtrl: ModalController,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private apiService: ApiService
   ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.getGoogleMaps()
-      .then((googleMaps) => {
-        const mapEl = this.mapElementRef.nativeElement;
-        const map = new googleMaps.Map(mapEl, {
-          center: { lat: 17.5039885987676, lng: 78.39537941039818 },
-          zoom: 19,
-        });
+    this.apiService.getPincodeCoordinates().subscribe((resObj) => {
 
-        googleMaps.event.addListenerOnce(map, 'idle', () => {
-          this.renderer.addClass(mapEl, 'visible');
-        });
+      this.latitude = resObj.results[0].geometry.location.lat;
+      this.longitude = resObj.results[0].geometry.location.lng;
 
-        map.addListener('click', (event) => {
-          const selectedCoords = {
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-          };
+      this.getGoogleMaps()
+        .then((googleMaps) => {
+          const mapEl = this.mapElementRef.nativeElement;
+          const map = new googleMaps.Map(mapEl, {
+            center: { lat: this.latitude, lng: this.longitude },
+            zoom: 12.5,
+          });
 
-          this.modalCtrl.dismiss(selectedCoords);
+          googleMaps.event.addListenerOnce(map, 'idle', () => {
+            this.renderer.addClass(mapEl, 'visible');
+          });
+
+          map.addListener('click', (event) => {
+            const selectedCoords = {
+              lat: event.latLng.lat(),
+              lng: event.latLng.lng(),
+            };
+
+            this.modalCtrl.dismiss(selectedCoords);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    });
   }
 
   onCancel() {

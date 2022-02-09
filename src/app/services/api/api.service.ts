@@ -125,6 +125,19 @@ export class ApiService {
     return this.getPostData('/payment_gateway_status', reqData);
   }
 
+  public getPincodeCoordinates() {
+    const pincodeUrl =
+      'https://maps.googleapis.com/maps/api/geocode/json?address=517124&key=AIzaSyCukoUWZ00j9dGUUrkaOxj0oAxAlxbFNkM';
+    return this.http.get<any>(pincodeUrl).pipe(
+      map((geoData) => {
+        if (!geoData || !geoData.results || geoData.results.length === 0) {
+          return null;
+        }
+        return geoData;
+      })
+    );
+  }
+
   private extractData(res: Response) {
     // console.log('Response Block=====>', res);
     const body = res;

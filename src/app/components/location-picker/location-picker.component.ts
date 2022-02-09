@@ -12,9 +12,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./location-picker.component.scss'],
 })
 export class LocationPickerComponent implements OnInit {
-
-  locationPicked=false;
-  formattedAdress='';
+  locationPicked = false;
+  formattedAdress = '';
   constructor(private modalCtrl: ModalController, private http: HttpClient) {}
 
   ngOnInit() {}
@@ -29,8 +28,8 @@ export class LocationPickerComponent implements OnInit {
         this.getAddress(modalData.data.lat, modalData.data.lng).subscribe(
           (address) => {
             console.log(address);
-            this.locationPicked=true;
-            this.formattedAdress=address;
+            this.locationPicked = true;
+            this.formattedAdress = address;
           }
         );
       });
