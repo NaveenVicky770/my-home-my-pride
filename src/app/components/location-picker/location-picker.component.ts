@@ -30,6 +30,7 @@ export class LocationPickerComponent implements OnInit {
             console.log(address);
             this.locationPicked = true;
             this.formattedAdress = address;
+            localStorage.setItem('formatted_address',address);
           }
         );
       });

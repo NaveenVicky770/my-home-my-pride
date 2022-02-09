@@ -182,6 +182,8 @@ export class AddlocationPage implements OnInit, AfterViewInit {
   }
 
   addLocation() {
+    const formattedAddress=localStorage.getItem('formatted_address');
+
     const existing_House = this.addLocationForm.get('existingHouseName').value
       ? this.addLocationForm.get('existingHouseName').value
       : 0;
@@ -199,7 +201,8 @@ export class AddlocationPage implements OnInit, AfterViewInit {
         area: this.addLocationForm.get('area').value,
         door_plot_no: this.addLocationForm.get('doorPlotNo').value,
         apartement: this.addLocationForm.get('apartment').value,
-        location: 'Aqwe',
+        pincode: this.addLocationForm.get('pincode').value,
+        location: formattedAddress,
         voice_direction: 'asdas',
       })
       .subscribe((resObj) => {
@@ -210,6 +213,7 @@ export class AddlocationPage implements OnInit, AfterViewInit {
           2000,
           'bottom'
         );
+        localStorage.removeItem('formatted_address');
       });
 
     this.router.navigateByUrl('/payments');
