@@ -161,6 +161,20 @@
 
         <ion-item lines="none">
           <ion-label position="stacked" color="secondary"
+            >Pin Code<span class="text-danger">*</span></ion-label
+          >
+          <ion-input
+            class="form-control ion-margin-top"
+            placeholder="  Enter Your Pin Code"
+            type="text"
+            formControlName="pincode"
+            required
+          >
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked" color="secondary"
             >Select Location<span class="text-danger">*</span></ion-label
           >
           <!-- <ion-input class="form-control ion-margin-top" placeholder="  Enter Location" type="text" required>
@@ -231,7 +245,9 @@
                 </ion-button>
               </ion-col>
               <ion-col size="10">
-                <label *ngIf="!recording" position="stacked">Long Press Mic to start and stop Recording</label>
+                <label *ngIf="!recording" position="stacked"
+                  >Long Press Mic to start and stop Recording</label
+                >
                 <span *ngIf="recording">{{durationDisplay}}</span>
               </ion-col>
             </ion-row>
@@ -239,14 +255,18 @@
         </ion-item>
 
         <ion-list>
-          <ion-item *ngFor="let f of storedFileNames" lines="none" >
-            <ion-button (click)="playFile(f)" >Play {{f}}</ion-button>
-            <ion-button slot="end" (click)="deleteRecording(f)" fill="clear" color="danger">
+          <ion-item *ngFor="let f of storedFileNames" lines="none">
+            <ion-button (click)="playFile(f)">Play {{f}}</ion-button>
+            <ion-button
+              slot="end"
+              (click)="deleteRecording(f)"
+              fill="clear"
+              color="danger"
+            >
               <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
             </ion-button>
           </ion-item>
         </ion-list>
-
       </ion-list>
     </form>
   </ion-card>

@@ -101,6 +101,10 @@ export class AddlocationPage implements OnInit, AfterViewInit {
         updateOn: 'change',
         validators: [Validators.required],
       }),
+      pincode: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required],
+      }),
     });
 
     this.apiService.getCurrentUser().subscribe((resObj) => {
