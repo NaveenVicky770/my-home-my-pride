@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GestureController, ModalController } from '@ionic/angular';
@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/services/common/common.service';
 
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { RecordingData, VoiceRecorder } from 'capacitor-voice-recorder';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 @Component({
   selector: 'app-addlocation',
@@ -16,6 +17,9 @@ import { RecordingData, VoiceRecorder } from 'capacitor-voice-recorder';
   styleUrls: ['./addlocation.page.scss'],
 })
 export class AddlocationPage implements OnInit, AfterViewInit {
+
+  @ViewChild('recordbtn',{read: ElementRef}) recordbtn: ElementRef;
+
   location: any;
   addLocationForm: FormGroup;
   currentUser;
@@ -51,6 +55,8 @@ export class AddlocationPage implements OnInit, AfterViewInit {
 
   recording = false;
   storedFileNames = [];
+  durationDisplay='';
+  duration=0;
 
   constructor(
     private apiService: ApiService,
@@ -142,11 +148,22 @@ export class AddlocationPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // const longPress = this.gestureCtrl.create({
+    const longPress = this.gestureCtrl.create({
+      el: this.recordbtn.nativeElement,
+      threshold:0,
+      gestureName: 'long-press',
+      onStart: ev =>{
+        Haptics.impact({style: ImpactStyle.Light});
+        this.startRecording();
+        this.calculateDuration();
+      },
+      onEnd: ev =>{
+        Haptics.impact({style: ImpactStyle.Light});
+        this.stopRecording();
+      }
+    },true);
 
-    // })
-
-    // longPress.enable();
+    longPress.enable();
   }
 
   addLocation() {
@@ -196,6 +213,24 @@ export class AddlocationPage implements OnInit, AfterViewInit {
       });
   }
 
+  calculateDuration(){
+    if(!this.recording){
+      this.duration=0;
+      this.durationDisplay='';
+      return;
+    }
+    this.duration+=1;
+
+    const minutes = Math.floor(this.duration/60);
+    const seconds = (this.duration % 60 ).toString().padStart(2,'0');
+
+    this.durationDisplay = `${minutes}: ${seconds}`;
+
+    setTimeout(()=>{
+      this.calculateDuration();
+    },1000);
+  }
+
   async loadFiles(){
     Filesystem.readdir({
       path:'',
@@ -220,6 +255,7 @@ export class AddlocationPage implements OnInit, AfterViewInit {
       return;
     }
     VoiceRecorder.stopRecording().then(async (result: RecordingData) => {
+      this.recording= false;
       if(result.value && result.value.recordDataBase64){
         const recordData = result.value.recordDataBase64;
         console.log('RECORD DATA ***********************', recordData);
@@ -246,6 +282,14 @@ export class AddlocationPage implements OnInit, AfterViewInit {
     const audioRef = new Audio(`data:audio/aac;base64,${base64Sound}`);
     audioRef.oncanplaythrough = ()=> audioRef.play();
     audioRef.load();
+  }
+
+  async deleteRecording(fileName){
+    await Filesystem.deleteFile({
+      directory:Directory.Data,
+      path: fileName
+    });
+    this.loadFiles();
   }
 
 }

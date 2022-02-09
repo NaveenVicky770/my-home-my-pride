@@ -213,7 +213,7 @@
         </ion-item>
 
         <ion-item lines="none">
-          <ion-label position="stacked" color="secondary"
+          <!-- <ion-label position="stacked" color="secondary"
             >Record Voice Direction<span class="text-danger">*</span>
           </ion-label>
 
@@ -221,14 +221,32 @@
             <ion-icon name="mic-outline" slot="end"></ion-icon>
             <ion-button (click)="startRecording()" color="primary" slot="end">Start</ion-button>
             <ion-button (click)="stopRecording()" color="danger" slot="end">Stop</ion-button>
-          </div>
+          </div> -->
 
-          <ion-list>
-            <ion-item button *ngFor="let f of storedFileNames" lines="none" (click)="playFile(f)">
-              {{f}}
-            </ion-item>
-          </ion-list>
+          <ion-toolbar>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="2">
+                <ion-button fill="clear" #recordbtn>
+                  <ion-icon name="mic-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="10">
+                <label *ngIf="!recording" position="stacked">Press Mic to start and stop Recording</label>
+                <span *ngIf="recording">{{durationDisplay}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-toolbar>
         </ion-item>
+
+        <ion-list>
+          <ion-item *ngFor="let f of storedFileNames" lines="none" >
+            <ion-button (click)="playFile(f)" >Play {{f}}</ion-button>
+            <ion-button slot="end" (click)="deleteRecording(f)" fill="clear" color="danger">
+              <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+
       </ion-list>
     </form>
   </ion-card>
