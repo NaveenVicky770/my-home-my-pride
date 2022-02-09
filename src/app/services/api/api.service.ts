@@ -121,6 +121,10 @@ export class ApiService {
       .pipe(map(this.extractData), catchError(this.handleError));
   }
 
+  public updatePaymentStatus(reqData) {
+    return this.getPostData('/payment_gateway_status', reqData);
+  }
+
   private extractData(res: Response) {
     console.log('Response Block=====>', res);
     const body = res;

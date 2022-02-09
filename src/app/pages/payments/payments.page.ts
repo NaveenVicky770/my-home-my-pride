@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 import { Checkout } from 'capacitor-razorpay';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-payments',
@@ -12,10 +13,12 @@ import { Checkout } from 'capacitor-razorpay';
   styleUrls: ['./payments.page.scss'],
 })
 export class PaymentsPage {
-  constructor(private alertController: AlertController) {}
+  constructor(
+    private alertController: AlertController,
+    private apiService: ApiService
+  ) {}
 
   async payWithRazorpay() {
-
     const orderId = localStorage.getItem('order_id');
 
     const options = {
@@ -50,6 +53,15 @@ export class PaymentsPage {
     const alert = await this.alertController.create({
       message: 'Payment Successful   ' + response['razorpay_payment_id'],
       backdropDismiss: true,
+    });
+
+    const orderData = {
+      order_id: response['razorpay_payment_id'],
+      status: 1,
+    };
+
+    this.apiService.updatePaymentStatus(orderData).subscribe((resObj)=>{
+      console.log(resObj);
     });
 
     await alert.present();
