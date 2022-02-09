@@ -15,7 +15,7 @@ export class ShowlocationPage implements OnInit {
   ngOnInit() {
     const userId = localStorage.getItem('showLocationUserId');
     console.log(userId);
-    this.apiService.getAllLocationsAndEvents().subscribe((resObj)=>{
+    this.apiService.getAllLocationsAndEvents(userId).subscribe((resObj)=>{
       console.log(resObj);
       this.allLocationsData=resObj.Locations;
 

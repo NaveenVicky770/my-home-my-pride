@@ -189,9 +189,8 @@ export class SigninPage implements OnInit {
 
   ionViewWillEnter() {
     this.currentFragment = 'mobile';
-    window.localStorage.removeItem('isLoggedIn');
-    window.localStorage.removeItem('user_id');
-    window.localStorage.removeItem('user_name');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('token');
     this.commonService.isUserLoggedIn.next(false);
   }
 

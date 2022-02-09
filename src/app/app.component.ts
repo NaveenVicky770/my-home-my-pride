@@ -82,8 +82,8 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    window.localStorage.removeItem('isLoggedIn');
-    window.localStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('token');
     this.commonService.isUserLoggedIn.next(false);
     this.commonService.presentToast('Logged Out', '', 2000, 'bottom');
     this.router.navigateByUrl('/signin');

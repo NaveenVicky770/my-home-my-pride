@@ -71,6 +71,12 @@ export class SignupPage implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('token');
+    this.commonService.isUserLoggedIn.next(false);
+  }
+
   ionViewDidEnter() {
     this.currentFragment = 'mobile';
   }

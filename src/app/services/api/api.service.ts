@@ -51,8 +51,8 @@ export class ApiService {
     return this.getPostData('/login', requestData);
   }
 
-  public getAllLocationsAndEvents() {
-    return this.getGetData('/get_user_locations_and_events');
+  public getAllLocationsAndEvents(userId) {
+    return this.getGetData('/get_user_locations_and_events?userid='+userId);
   }
 
   public addLocation(requestData) {
