@@ -154,6 +154,13 @@ export class AddlocationPage implements OnInit, AfterViewInit {
       gestureName: 'long-press',
       onStart: ev =>{
         Haptics.impact({style: ImpactStyle.Light});
+
+        this.storedFileNames.forEach(element => {
+          Filesystem.deleteFile({
+            path:element,
+            directory:Directory.Data
+          });
+        });
         this.startRecording();
         this.calculateDuration();
       },
